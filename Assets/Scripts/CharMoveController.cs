@@ -12,7 +12,6 @@ public class CharMoveController : MonoBehaviour
     public float jumpingPower;
     public bool isMoving = false;
     public float y_diff;
-    public int attackComboCount;
 
     private float horizontal;
     private float horzSpeed = 0f;
@@ -24,7 +23,6 @@ public class CharMoveController : MonoBehaviour
     {
         horizontal = 0f;
         previousY = transform.position.y;
-        attackComboCount = 0;
     }
 
     // Update is called once per frame
@@ -77,10 +75,5 @@ public class CharMoveController : MonoBehaviour
     public void Move(float input)
     {
         horizontal = input;
-    }
-
-    public void Attack()
-    {
-        attackComboCount += 1;
     }
 }

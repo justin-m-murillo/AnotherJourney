@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerInput : MonoBehaviour
 {
     [SerializeField] CharMoveController _cmc;
+    [SerializeField] PlayerCombat _pc;
 
     public void JumpInput(InputAction.CallbackContext context)
     {
@@ -29,7 +30,7 @@ public class PlayerInput : MonoBehaviour
     {
         if (context.performed)
         {
-            _cmc.Attack();
+            _pc.Attack();
         }
     }
 }

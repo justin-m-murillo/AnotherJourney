@@ -35,14 +35,5 @@ public class AnimController : MonoBehaviour
             airInput = 0;
         }
         _anim.SetInteger("IsAir", airInput);
-
-        int attackInput = _cmc.attackComboCount;
-        _anim.SetInteger("IsAttacking", attackInput);
-
-    }
-
-    public void TerminateAttackCombo()
-    {
-        _cmc.attackComboCount = 0;
     }
 }
