@@ -4,27 +4,24 @@ using UnityEngine;
 
 public class Jump : BaseState
 {
-    private readonly MovementSM _movementSM;
-    private float MAX_Y;
+    protected MovementSM _movementSM;
     private float _prevY;
-    private float _ydiff;
+    private float _yDiff;
 
-    public Jump(MovementSM stateMachine) : base("Jump", stateMachine)
+    public Jump(MovementSM stateMachine) : base("Jump", stateMachine) 
     {
         _movementSM = (MovementSM)stateMachine;
-        
     }
 
     public override void OnEnter()
     {
         base.OnEnter();
 
-        _prevY = _movementSM.RBody.position.y;
-        MAX_Y = _movementSM.JumpForce;
+        _prevY = _movementSM.RigBody.position.y;
 
-        Vector2 vel = _movementSM.RBody.velocity;
+        Vector2 vel = _movementSM.RigBody.velocity;
         vel.y += _movementSM.JumpForce;
-        _movementSM.RBody.velocity = vel;
+        _movementSM.RigBody.velocity = vel;
 
         _movementSM.Anim.TriggerJump();
     }
@@ -33,21 +30,13 @@ public class Jump : BaseState
     {
         base.OnUpdate();
 
-        _ydiff = _movementSM.RBody.position.y - _prevY;
-        
-        if (_ydiff < 0)
+        _yDiff = _movementSM.RigBody.position.y - _prevY;
+        if (_yDiff < 0)
         {
             stateMachine.ChangeState(_movementSM.fallingState);
         }
-
-        _prevY = _movementSM.RBody.position.y;
+        _prevY = _movementSM.RigBody.position.y;
     }
 
-    public override void OnFixedUpdate()
-    {
-        base.OnFixedUpdate();
-        Vector2 vel = _movementSM.RBody.velocity;
-        vel.y = Mathf.Clamp(vel.y, -MAX_Y, MAX_Y);
-        _movementSM.RBody.velocity = vel;
-    }
+
 }

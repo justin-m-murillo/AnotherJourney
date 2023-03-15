@@ -20,24 +20,21 @@ public class MovementSM : StateMachine
     [SerializeField] protected AnimController _anim;
 
     [SerializeField] float _defaultMovementSpeed;
+    [SerializeField] float _defaultDragFactor;
     [SerializeField] float _defaultJumpForce;
-    [SerializeField] float _defualtJumpFactor;
     [SerializeField] float _defaultGravityFactor;
 
     public Transform CharacterTransform { get; private set; }
 
     public Transform GroundCheck { get; private set; }
     public LayerMask GroundLayer { get; private set; }
-    public Rigidbody2D RBody { get; private set; }
+    public Rigidbody2D RigBody { get; private set; }
     public AnimController Anim { get; private set; }
     public float HorizontalInput { get; set; }
     public float MovementSpeed { get; set; }
-
-    public bool Jumped { get; set; }
+    public float DragFactor { get; set; }
     public float JumpForce { get; set; }
     public bool JumpPerformed { get; set; }
-    public float JumpMultiplier { get; set; }
-
     public float GravityStored { get; set; }
     public float GravityFactor { get; set; }
 
@@ -52,16 +49,17 @@ public class MovementSM : StateMachine
         CharacterTransform = _characterTransform;
         GroundCheck = _groundCheck;
         GroundLayer = _groundLayer;
-        RBody = _rb;
+        RigBody = _rb;
         Anim = _anim;
 
         HorizontalInput = 0f;
         MovementSpeed = _defaultMovementSpeed;
-        Jumped = false;
+        DragFactor = _defaultDragFactor;
+
         JumpForce = _defaultJumpForce;
         JumpPerformed = false;
-        JumpMultiplier = _defualtJumpFactor;
-        GravityStored = RBody.gravityScale;
+
+        GravityStored = RigBody.gravityScale;
         GravityFactor = _defaultGravityFactor;
     }
 
@@ -79,16 +77,16 @@ public class MovementSM : StateMachine
     public void InvokeJump() 
     {
         if (!IsGrounded()) return;
-        Jumped = true;
+        //Jumped = true;
     }
 
     public void InvokeGravityScaler()
     {
-        RBody.gravityScale = GravityStored * GravityFactor;
+        RigBody.gravityScale = GravityFactor;
     }
 
     public bool IsGrounded()
     {
-        return RBody.IsTouchingLayers(_groundLayer);
+        return RigBody.IsTouchingLayers(_groundLayer);
     }
 }

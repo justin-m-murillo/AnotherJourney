@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class Falling : BaseState
 {
-    private readonly MovementSM _movementSM;
-
-    public Falling(MovementSM stateMachine) : base("Falling", stateMachine)
-    {
-        _movementSM = stateMachine;
+    protected MovementSM _movementSM;
+    public Falling(MovementSM stateMachine) : base("Falling", stateMachine) 
+    { 
+        _movementSM = (MovementSM)stateMachine;
     }
 
     public override void OnEnter()
@@ -21,27 +20,17 @@ public class Falling : BaseState
     public override void OnExit()
     {
         base.OnExit();
-        _movementSM.Jumped = false;
-        _movementSM.JumpPerformed = false;
-        _movementSM.RBody.gravityScale = _movementSM.GravityStored;
 
+        Grounded.jumpCooldown = Grounded.defaultJumpCooldown;
     }
 
-    public override void OnFixedUpdate()
+    public override void OnUpdate()
     {
-        base.OnFixedUpdate();
+        base.OnUpdate();
 
         if (_movementSM.IsGrounded())
         {
-            if (Mathf.Abs(_movementSM.HorizontalInput) < Mathf.Epsilon)
-            {
-                stateMachine.ChangeState(_movementSM.idleState);
-            }
-            else
-            {
-                stateMachine.ChangeState(_movementSM.movingState);
-            }
-            
+            stateMachine.ChangeState(_movementSM.movingState);
         }
     }
 }

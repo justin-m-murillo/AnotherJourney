@@ -3,24 +3,35 @@ using UnityEngine;
 public class Moving : Grounded
 {
     private bool isFacingRight = true;
-    private float calcSpeed = 0f;
 
     public Moving(MovementSM stateMachine) : base("Moving", stateMachine) 
     {
-        _movementSM = stateMachine;
+        _movementSM = (MovementSM)stateMachine;
     }
 
     public override void OnEnter()
     {
         base.OnEnter();
+
+        _movementSM.HorizontalInput = 0f;
+
         _movementSM.Anim.TriggerMove();
     }
 
     public override void OnUpdate()
     {
         base.OnUpdate();
-        
-        if (Mathf.Abs(_movementSM.HorizontalInput) < Mathf.Epsilon)
+
+        if (!isFacingRight && _horizontalInput > 0f)
+        {
+            Flip();
+        }
+        if (isFacingRight && _horizontalInput < 0f)
+        {
+            Flip();
+        }
+
+        if (Mathf.Abs(_horizontalInput) < Mathf.Epsilon)
         {
             stateMachine.ChangeState(_movementSM.idleState);
         }
@@ -30,20 +41,9 @@ public class Moving : Grounded
     {
         base.OnFixedUpdate();
 
-        calcSpeed = _movementSM.HorizontalInput * _movementSM.MovementSpeed;
-        
-        _movementSM.RBody.velocity = new Vector2(
-            calcSpeed, 
-            _movementSM.RBody.velocity.y);
-
-        if (!isFacingRight && _movementSM.HorizontalInput > 0f)
-        {
-            Flip();
-        }
-        if (isFacingRight && _movementSM.HorizontalInput < 0f)
-        {
-            Flip();
-        }
+        Vector2 vel = _movementSM.RigBody.velocity;
+        vel.x = _horizontalInput * _movementSM.MovementSpeed;
+        _movementSM.RigBody.velocity = vel;
     }
 
     private void Flip()

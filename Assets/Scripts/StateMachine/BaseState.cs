@@ -6,11 +6,13 @@ public class BaseState
 {
     public string name;
     protected StateMachine stateMachine;
+    protected PlayerControls controls = new();
 
     public BaseState(string name, StateMachine stateMachine)
     {
         this.name = name;
         this.stateMachine = stateMachine;
+        controls.Enable();
     }
 
     public virtual void OnEnter() { }

@@ -131,7 +131,6 @@ GameObject:
   - component: {fileID: 2514173954590323078}
   - component: {fileID: 2514173954590323079}
   - component: {fileID: 2514173954590323077}
-  - component: {fileID: 2514173954590323076}
   - component: {fileID: 7453179596225468221}
   - component: {fileID: 1435395113}
   m_Layer: 0
@@ -232,7 +231,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2514173954590323076}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
         m_MethodName: MoveInput
         m_Mode: 0
@@ -252,7 +251,7 @@ MonoBehaviour:
     m_ActionName: PlayerControlsMap/Jump[/Keyboard/space]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2514173954590323076}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
         m_MethodName: AttackInput
         m_Mode: 0
@@ -271,19 +270,6 @@ MonoBehaviour:
   m_DefaultActionMap: PlayerControlsMap
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &2514173954590323076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2514173954590323128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a0aac17c210ba947ad3c042f8620666, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _movementStateMachine: {fileID: 7453179596225468221}
 --- !u!114 &7453179596225468221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,8 +290,9 @@ MonoBehaviour:
   _rb: {fileID: 2514173954590323078}
   _anim: {fileID: 2514173954286973709}
   _defaultMovementSpeed: 8
+  _defaultDragFactor: 0
   _defaultJumpForce: 16
-  _gravityFactor: 1
+  _defaultGravityFactor: 0
 --- !u!114 &1435395113
 MonoBehaviour:
   m_ObjectHideFlags: 0
