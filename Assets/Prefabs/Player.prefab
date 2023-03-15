@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6aebeda228af244487f4005b450ec67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cmc: {fileID: 2514173954590323074}
+  _anim: {fileID: 2514173954286973706}
 --- !u!1 &2514173954590323128
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,7 +132,8 @@ GameObject:
   - component: {fileID: 2514173954590323079}
   - component: {fileID: 2514173954590323077}
   - component: {fileID: 2514173954590323076}
-  - component: {fileID: 2514173954590323074}
+  - component: {fileID: 7453179596225468221}
+  - component: {fileID: 1435395113}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -246,10 +247,14 @@ MonoBehaviour:
     m_ActionId: ff0aae09-6ff9-4bfb-ba75-0685f95a4032
     m_ActionName: PlayerControlsMap/Move[/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: dc49fead-78c1-470d-9f4b-e81fb52344b1
+    m_ActionName: PlayerControlsMap/Jump[/Keyboard/space]
+  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2514173954590323076}
         m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
-        m_MethodName: JumpInput
+        m_MethodName: AttackInput
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -259,8 +264,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: dc49fead-78c1-470d-9f4b-e81fb52344b1
-    m_ActionName: PlayerControlsMap/Jump[/Keyboard/space]
+    m_ActionId: bab0b3ff-19f8-445e-9b0e-308bb6f8e8a8
+    m_ActionName: PlayerControlsMap/Attack[/Keyboard/j]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerControlsMap
@@ -278,8 +283,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a0aac17c210ba947ad3c042f8620666, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cmc: {fileID: 2514173954590323074}
---- !u!114 &2514173954590323074
+  _movementStateMachine: {fileID: 7453179596225468221}
+--- !u!114 &7453179596225468221
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -288,18 +293,40 @@ MonoBehaviour:
   m_GameObject: {fileID: 2514173954590323128}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a68884e3c5eaf1b4cba9826235f5f278, type: 3}
+  m_Script: {fileID: 11500000, guid: 26183a12b7656154d90bf823a069c8c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 2514173954590323078}
-  groundCheck: {fileID: 2514173955399228228}
-  groundLayer:
+  _characterTransform: {fileID: 2514173954590323129}
+  _groundCheck: {fileID: 2514173955399228228}
+  _groundLayer:
     serializedVersion: 2
     m_Bits: 256
-  speed: 8
-  jumpingPower: 14
-  isMoving: 0
-  y_diff: 0
+  _rb: {fileID: 2514173954590323078}
+  _anim: {fileID: 2514173954286973709}
+  _defaultMovementSpeed: 8
+  _defaultJumpForce: 16
+  _gravityFactor: 1
+--- !u!114 &1435395113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2514173954590323128}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 603c93c4f3e0b25489c265b8ba929d9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _anim: {fileID: 2514173954286973706}
+  _comboDuration: 0.4
+  _comboDelay: 0.15
+  _meleeComboMoves:
+  - Attack1
+  - Attack2
+  - Attack3
+  - Attack4
+  - Attack5
 --- !u!1 &2514173955399228231
 GameObject:
   m_ObjectHideFlags: 0

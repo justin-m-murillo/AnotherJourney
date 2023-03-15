@@ -5,32 +5,57 @@ using UnityEngine.InputSystem;
 
 public class PlayerInput : MonoBehaviour
 {
-    [SerializeField] CharMoveController _cmc;
-    [SerializeField] PlayerCombat _pc;
+    //[SerializeField] StateMachine _stateMachine;
+    [SerializeField] MovementSM _movementStateMachine;
+    private PlayerControls playerControls;
 
-    public void JumpInput(InputAction.CallbackContext context)
+    private void Start()
     {
-        if (context.performed)
-        {
-            _cmc.Jump(true);
-        }
+        //playerControls.PlayerControlsMap.Enable();
+        playerControls.PlayerControlsMap.Jump.started += JumpStarted;
+        playerControls.PlayerControlsMap.Jump.performed += JumpPerformed;
+        playerControls.PlayerControlsMap.Jump.canceled += JumpCanceled;
+    }
 
-        if (context.canceled)
-        {
-            _cmc.Jump(false);
-        }
+    private void OnEnable()
+    {
+        playerControls = new PlayerControls();
+        playerControls.Enable();
+    }
+    private void OnDisable()
+    {
+        playerControls.Disable();
+    }
+
+    public void JumpStarted(InputAction.CallbackContext context)
+    {
+        Debug.Log("start jumped");
+        _movementStateMachine.InvokeJump(true, 0.75f);
+    }
+
+    public void JumpPerformed(InputAction.CallbackContext context)
+    {
+        Debug.Log("perf jumped");
+        _movementStateMachine.InvokeJump(false, 0.5f);
+    }
+
+    public void JumpCanceled(InputAction.CallbackContext context)
+    {
+        Debug.Log("end jump");
+        _movementStateMachine.Jumped = false;
     }
 
     public void MoveInput(InputAction.CallbackContext context)
     {
-        _cmc.Move(context.ReadValue<Vector2>().x);
+        //_cmc.Move(context.ReadValue<Vector2>().x);
+        _movementStateMachine.HorizontalInput = context.ReadValue<Vector2>().x;
     }
 
     public void AttackInput(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        /*if (context.performed)
         {
             _pc.Attack();
-        }
+        }*/
     }
 }
