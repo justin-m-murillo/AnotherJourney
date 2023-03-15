@@ -72,7 +72,7 @@ public class MovementSM : StateMachine
 
     public void SetHorizontalInput(float horizontalInput)
     {
-        if (!IsGrounded()) return;
+        //if (!IsGrounded()) return;
         HorizontalInput = horizontalInput;
     }
 
@@ -89,6 +89,6 @@ public class MovementSM : StateMachine
 
     public bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(GroundCheck.position, 0.2f, GroundLayer);
+        return RBody.IsTouchingLayers(_groundLayer);
     }
 }

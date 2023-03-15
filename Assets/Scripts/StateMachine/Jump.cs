@@ -22,18 +22,11 @@ public class Jump : BaseState
         _prevY = _movementSM.RBody.position.y;
         MAX_Y = _movementSM.JumpForce;
 
-        Vector2 force = _movementSM.JumpForce * Vector2.up;
-        force.y = Mathf.Clamp(force.y, -MAX_Y, MAX_Y);
-        _movementSM.RBody.velocity += force;
+        Vector2 vel = _movementSM.RBody.velocity;
+        vel.y += _movementSM.JumpForce;
+        _movementSM.RBody.velocity = vel;
 
         _movementSM.Anim.TriggerJump();
-    }
-
-    public override void OnExit()
-    {
-        base.OnExit();
-
-        //_movementSM.Jumped = false;
     }
 
     public override void OnUpdate()
@@ -41,7 +34,7 @@ public class Jump : BaseState
         base.OnUpdate();
 
         _ydiff = _movementSM.RBody.position.y - _prevY;
-        //Debug.Log("YDIFF: " + _ydiff);
+        
         if (_ydiff < 0)
         {
             stateMachine.ChangeState(_movementSM.fallingState);

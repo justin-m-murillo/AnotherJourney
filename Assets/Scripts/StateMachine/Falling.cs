@@ -33,7 +33,15 @@ public class Falling : BaseState
 
         if (_movementSM.IsGrounded())
         {
-            stateMachine.ChangeState(_movementSM.idleState);
+            if (Mathf.Abs(_movementSM.HorizontalInput) < Mathf.Epsilon)
+            {
+                stateMachine.ChangeState(_movementSM.idleState);
+            }
+            else
+            {
+                stateMachine.ChangeState(_movementSM.movingState);
+            }
+            
         }
     }
 }

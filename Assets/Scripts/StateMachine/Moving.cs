@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class Moving : Grounded
 {
@@ -32,8 +29,8 @@ public class Moving : Grounded
     public override void OnFixedUpdate() 
     {
         base.OnFixedUpdate();
-        //Debug.Log(_movementSM.HorizontalInput);
-        calcSpeed = _movementSM.IsGrounded() ? _movementSM.HorizontalInput * _movementSM.MovementSpeed : calcSpeed;
+
+        calcSpeed = _movementSM.HorizontalInput * _movementSM.MovementSpeed;
         
         _movementSM.RBody.velocity = new Vector2(
             calcSpeed, 

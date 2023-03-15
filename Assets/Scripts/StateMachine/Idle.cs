@@ -13,7 +13,6 @@ public class Idle : Grounded
     {
         base.OnEnter();
         _movementSM.Anim.TriggerIdle();
-        //HorizontalInput = 0f;
     }
 
     public override void OnUpdate()
@@ -26,10 +25,10 @@ public class Idle : Grounded
         }
     }
 
-    public override void OnFixedUpdate()
+    /*public override void OnFixedUpdate()
     {
         base.OnFixedUpdate();
 
         _movementSM.RBody.velocity = new Vector2(0, _movementSM.RBody.velocity.y);
-    }
+    }*/
 }

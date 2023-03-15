@@ -8,10 +8,10 @@ public class PlayerInput : MonoBehaviour
     //[SerializeField] StateMachine _stateMachine;
     [SerializeField] MovementSM _movementStateMachine;
     private PlayerControls playerControls;
+    private float _horizontalInput;
 
     private void Start()
     {
-        //playerControls.PlayerControlsMap.Enable();
         playerControls.PlayerControlsMap.Jump.started += JumpStarted;
         playerControls.PlayerControlsMap.Jump.performed += JumpPerformed;
         playerControls.PlayerControlsMap.Jump.canceled += JumpCanceled;
@@ -25,6 +25,11 @@ public class PlayerInput : MonoBehaviour
     private void OnDisable()
     {
         playerControls.Disable();
+    }
+
+    private void Update()
+    {
+        _movementStateMachine.HorizontalInput = _horizontalInput;
     }
 
     public void JumpStarted(InputAction.CallbackContext context)
@@ -49,7 +54,7 @@ public class PlayerInput : MonoBehaviour
 
     public void MoveInput(InputAction.CallbackContext context)
     {
-        _movementStateMachine.HorizontalInput = context.ReadValue<Vector2>().x;
+        _horizontalInput = context.ReadValue<Vector2>().x;
     }
 
     public void AttackInput(InputAction.CallbackContext context)
