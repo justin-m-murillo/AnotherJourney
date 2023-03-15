@@ -58,8 +58,6 @@ public class Grounded : BaseState
     public void JumpCanceled(InputAction.CallbackContext context)
     {
         if (!context.performed)
-        {
             _movementSM.InvokeGravityScaler();
-        }
     }
 }
