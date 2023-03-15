@@ -290,9 +290,9 @@ MonoBehaviour:
   _rb: {fileID: 2514173954590323078}
   _anim: {fileID: 2514173954286973709}
   _defaultMovementSpeed: 8
-  _defaultDragFactor: 0
-  _defaultJumpForce: 16
-  _defaultGravityFactor: 0
+  _defaultDragFactor: 4
+  _defaultJumpForce: 8
+  _defaultGravityFactor: 8
 --- !u!114 &1435395113
 MonoBehaviour:
   m_ObjectHideFlags: 0
