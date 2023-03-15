@@ -29,25 +29,26 @@ public class PlayerInput : MonoBehaviour
 
     public void JumpStarted(InputAction.CallbackContext context)
     {
-        Debug.Log("start jumped");
-        _movementStateMachine.InvokeJump(true, 0.75f);
+        if (!_movementStateMachine.Jumped)
+            _movementStateMachine.InvokeJump();
     }
 
     public void JumpPerformed(InputAction.CallbackContext context)
     {
-        Debug.Log("perf jumped");
-        _movementStateMachine.InvokeJump(false, 0.5f);
+        if (_movementStateMachine.Jumped)
+            _movementStateMachine.JumpPerformed = true;
     }
 
     public void JumpCanceled(InputAction.CallbackContext context)
     {
-        Debug.Log("end jump");
-        _movementStateMachine.Jumped = false;
+        if (!_movementStateMachine.JumpPerformed)
+        {
+            _movementStateMachine.InvokeGravityScaler();
+        }
     }
 
     public void MoveInput(InputAction.CallbackContext context)
     {
-        //_cmc.Move(context.ReadValue<Vector2>().x);
         _movementStateMachine.HorizontalInput = context.ReadValue<Vector2>().x;
     }
 

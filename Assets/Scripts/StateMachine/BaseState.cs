@@ -14,7 +14,6 @@ public class BaseState
     }
 
     public virtual void OnEnter() { }
-
     public virtual void OnFixedUpdate() { }
     public virtual void OnUpdate() { }
     public virtual void OnLateUpdate() { }

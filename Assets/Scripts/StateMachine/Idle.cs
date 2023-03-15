@@ -20,7 +20,6 @@ public class Idle : Grounded
     {
         base.OnUpdate();
 
-
         if (Mathf.Abs(_movementSM.HorizontalInput) > Mathf.Epsilon)
         {
             stateMachine.ChangeState(_movementSM.movingState);

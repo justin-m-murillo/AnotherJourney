@@ -11,8 +11,6 @@ public class MovementSM : StateMachine
     [HideInInspector]
     public Jump jumpState;
     [HideInInspector]
-    public JumpShort jumpShortState;
-    [HideInInspector]
     public Falling fallingState;
 
     [SerializeField] protected Transform _characterTransform;
@@ -23,7 +21,8 @@ public class MovementSM : StateMachine
 
     [SerializeField] float _defaultMovementSpeed;
     [SerializeField] float _defaultJumpForce;
-    [SerializeField] float _gravityFactor;
+    [SerializeField] float _defualtJumpFactor;
+    [SerializeField] float _defaultGravityFactor;
 
     public Transform CharacterTransform { get; private set; }
 
@@ -36,16 +35,18 @@ public class MovementSM : StateMachine
 
     public bool Jumped { get; set; }
     public float JumpForce { get; set; }
+    public bool JumpPerformed { get; set; }
     public float JumpMultiplier { get; set; }
 
+    public float GravityStored { get; set; }
     public float GravityFactor { get; set; }
+
 
     void Awake()
     {
         idleState = new Idle(this);
         movingState = new Moving(this);
         jumpState = new Jump(this);
-        jumpShortState = new JumpShort(this);
         fallingState = new Falling(this);
 
         CharacterTransform = _characterTransform;
@@ -58,8 +59,10 @@ public class MovementSM : StateMachine
         MovementSpeed = _defaultMovementSpeed;
         Jumped = false;
         JumpForce = _defaultJumpForce;
-        JumpMultiplier = 0f;
-        GravityFactor = _gravityFactor;
+        JumpPerformed = false;
+        JumpMultiplier = _defualtJumpFactor;
+        GravityStored = RBody.gravityScale;
+        GravityFactor = _defaultGravityFactor;
     }
 
     protected override BaseState GetInitialState()
@@ -67,17 +70,21 @@ public class MovementSM : StateMachine
         return idleState;
     }
 
-    public void InvokeJump(bool status, float mult) 
-    { 
-        JumpMultiplier += mult;
+    public void SetHorizontalInput(float horizontalInput)
+    {
+        if (!IsGrounded()) return;
+        HorizontalInput = horizontalInput;
+    }
 
-        Vector2 force = JumpForce * JumpMultiplier * Vector2.up;
+    public void InvokeJump() 
+    {
+        if (!IsGrounded()) return;
+        Jumped = true;
+    }
 
-        Vector2 vel = RBody.velocity;
-        vel.y += JumpForce * JumpMultiplier;
-        RBody.velocity = vel;
-
-        Jumped = status;
+    public void InvokeGravityScaler()
+    {
+        RBody.gravityScale = GravityStored * GravityFactor;
     }
 
     public bool IsGrounded()

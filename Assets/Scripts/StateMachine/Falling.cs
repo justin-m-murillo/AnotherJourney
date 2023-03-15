@@ -15,21 +15,21 @@ public class Falling : BaseState
     {
         base.OnEnter();
 
-        Vector2 vel = _movementSM.RBody.velocity;
-        vel.y -= _movementSM.JumpForce * _movementSM.JumpMultiplier;
-        _movementSM.RBody.velocity = vel;
-
         _movementSM.Anim.TriggerFalling();
     }
 
     public override void OnExit()
     {
         base.OnExit();
+        _movementSM.Jumped = false;
+        _movementSM.JumpPerformed = false;
+        _movementSM.RBody.gravityScale = _movementSM.GravityStored;
+
     }
 
-    public override void OnUpdate()
+    public override void OnFixedUpdate()
     {
-        base.OnUpdate();
+        base.OnFixedUpdate();
 
         if (_movementSM.IsGrounded())
         {

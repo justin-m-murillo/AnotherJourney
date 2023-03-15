@@ -15,7 +15,7 @@ public class Grounded : BaseState
     {
         base.OnUpdate();
 
-        if (_movementSM.Jumped)
+        if (_movementSM.Jumped && _movementSM.IsGrounded())
         {
             stateMachine.ChangeState(_movementSM.jumpState);
         }
