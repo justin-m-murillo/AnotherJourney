@@ -1240,21 +1240,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7453179596225468221, guid: c43e1ff1f3fcbd946ad45ae9af9a53f7, type: 3}
-      propertyPath: _defaultJumpForce
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7453179596225468221, guid: c43e1ff1f3fcbd946ad45ae9af9a53f7, type: 3}
-      propertyPath: _defaultDragFactor
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7453179596225468221, guid: c43e1ff1f3fcbd946ad45ae9af9a53f7, type: 3}
-      propertyPath: _defualtJumpFactor
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7453179596225468221, guid: c43e1ff1f3fcbd946ad45ae9af9a53f7, type: 3}
-      propertyPath: _defaultGravityFactor
-      value: 8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c43e1ff1f3fcbd946ad45ae9af9a53f7, type: 3}
