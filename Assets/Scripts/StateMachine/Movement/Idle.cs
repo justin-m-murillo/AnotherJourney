@@ -21,7 +21,7 @@ public class Idle : Grounded
     {
         base.OnUpdate();
 
-        if (Mathf.Abs(_horizontalInput) > Mathf.Epsilon)
+        if (Mathf.Abs(static_horizontalInput) > Mathf.Epsilon)
         {
             stateMachine.ChangeState(_psm.movingState);
         }
@@ -30,11 +30,6 @@ public class Idle : Grounded
     public override void OnFixedUpdate()
     {
         base.OnFixedUpdate();
-
-        // To eliminate sliding when approaching rest
-        _psm.RigBody.AddForce(new Vector2
-            (-(_psm.RigBody.velocity.x * _psm.DragFactor), 0),
-            ForceMode2D.Force
-        );
+        ApplyGroundDrag();
     }
 }

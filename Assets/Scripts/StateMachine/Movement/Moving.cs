@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class Moving : Grounded
 {
-    private bool isFacingRight = true;
-
     public Moving(PlayerSM stateMachine) : base("Moving", stateMachine) 
     {
         _psm = (PlayerSM)stateMachine;
@@ -21,16 +19,16 @@ public class Moving : Grounded
     {
         base.OnUpdate();
 
-        if (!isFacingRight && _horizontalInput > 0f)
+        if (!static_isFacingRight && static_horizontalInput > 0f)
         {
             Flip();
         }
-        if (isFacingRight && _horizontalInput < 0f)
+        if (static_isFacingRight && static_horizontalInput < 0f)
         {
             Flip();
         }
 
-        if (Mathf.Abs(_horizontalInput) < Mathf.Epsilon)
+        if (Mathf.Abs(static_horizontalInput) < Mathf.Epsilon)
         {
             stateMachine.ChangeState(_psm.idleState);
         }
@@ -41,13 +39,13 @@ public class Moving : Grounded
         base.OnFixedUpdate();
 
         Vector2 vel = _psm.RigBody.velocity;
-        vel.x = _horizontalInput * _psm.MovementSpeed;
+        vel.x = static_horizontalInput * _psm.MovementSpeed;
         _psm.RigBody.velocity = vel;
     }
 
     private void Flip()
     {
-        isFacingRight = !isFacingRight;
+        static_isFacingRight = !static_isFacingRight;
         Vector3 localScale = _psm.CharacterTransform.localScale;
         localScale.x *= -1f;
         _psm.CharacterTransform.localScale = localScale;

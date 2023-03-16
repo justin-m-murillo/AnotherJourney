@@ -3,8 +3,6 @@ using UnityEngine.InputSystem;
 
 public class Grounded : ContainerState
 {
-    
-
     // to prevent double jump glitches 
     public static float defaultJumpCooldown = 0.02f;
     public static float jumpCooldown = defaultJumpCooldown; 
@@ -12,7 +10,7 @@ public class Grounded : ContainerState
     public Grounded(string name, PlayerSM stateMachine) : base(name, stateMachine)
     {
         _psm = (PlayerSM)stateMachine;
-        _horizontalInput = 0f;
+        static_horizontalInput = 0f;
         playerControls.PlayerControlsMap.Jump.started += JumpStarted;
         playerControls.PlayerControlsMap.Jump.performed += JumpPerformed;
         playerControls.PlayerControlsMap.Jump.canceled += JumpCanceled;
@@ -27,7 +25,7 @@ public class Grounded : ContainerState
     {
         base.OnUpdate();
 
-        _horizontalInput = playerControls.PlayerControlsMap.Move.ReadValue<Vector2>().x;
+        static_horizontalInput = playerControls.PlayerControlsMap.Move.ReadValue<Vector2>().x;
 
         if (_psm.IsGrounded())
         {

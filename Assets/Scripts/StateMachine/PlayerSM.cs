@@ -35,6 +35,8 @@ public class PlayerSM : StateMachine
     [SerializeField] float _defaultJumpForce;
     [Tooltip("Character's default gravity scale when falling (to fall faster)")]
     [SerializeField] float _defaultGravityFall;
+    [Tooltip("Amount to nudge the character forward when attacking")]
+    [SerializeField] float _attackPush;
 
     /// <summary>
     /// Horizontal input used to affect character's movement
@@ -72,6 +74,11 @@ public class PlayerSM : StateMachine
     /// </summary>
     public float GravityFall { get; set; }
 
+    /// <summary>
+    /// Amount to nudge the character forward while attacking
+    /// </summary>
+    public float AttackPushValue { get; set; }
+
 
     void Awake()
     {
@@ -108,6 +115,8 @@ public class PlayerSM : StateMachine
 
         GravityStored = RigBody.gravityScale;
         GravityFall = _defaultGravityFall;
+
+        AttackPushValue = _attackPush;
     }
 
     /// <summary>

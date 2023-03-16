@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class ContainerState : BaseState
@@ -12,7 +13,8 @@ public class ContainerState : BaseState
 
     protected static int static_comboIndex = 0;
 
-    protected float _horizontalInput;
+    protected float static_horizontalInput;
+    protected static bool static_isFacingRight;
 
     protected PlayerSM _psm;
     protected PlayerControls playerControls = new();
@@ -20,9 +22,20 @@ public class ContainerState : BaseState
     public ContainerState(string name, PlayerSM stateMachine) : base(name, stateMachine)
     {
         _psm = stateMachine;
+        static_isFacingRight = true;
+
         playerControls.Enable();
 
         playerControls.PlayerControlsMap.Attack.started += AttackStarted;
+    }
+
+    protected void ApplyGroundDrag(float mult = 1f)
+    {
+        // To eliminate sliding when approaching rest
+        _psm.RigBody.AddForce(new Vector2
+            (-(_psm.RigBody.velocity.x * (_psm.DragFactor * mult)), 0),
+            ForceMode2D.Force
+        );
     }
 
     public void AttackStarted(InputAction.CallbackContext context)

@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aca36ed1e3a117a45af3a4984277bdc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _psm: {fileID: 0}
+  _psm: {fileID: 8037024654266756644}
 --- !u!1 &2514173954590323128
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,13 +282,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4083812f43b88904ca20af5f86f78eee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterTransform: {fileID: 0}
+  _characterTransform: {fileID: 2514173954590323129}
   _groundLayer:
     serializedVersion: 2
-    m_Bits: 0
-  _rb: {fileID: 0}
-  _anim: {fileID: 0}
+    m_Bits: 256
+  _rb: {fileID: 2514173954590323078}
+  _anim: {fileID: 2514173954286973709}
   _defaultMovementSpeed: 8
-  _defaultDragFactor: 5
+  _defaultDragFactor: 10
   _defaultJumpForce: 8
   _defaultGravityFall: 8

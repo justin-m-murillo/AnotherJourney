@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class CombatState : ContainerState
 {
-    public bool AnimComplete { get; set; }
-
     public CombatState(string name, PlayerSM stateMachine) : base(name, stateMachine)
     {
         _psm = (PlayerSM)stateMachine;
@@ -18,14 +16,11 @@ public class CombatState : ContainerState
 
         static_canAttack = false;
         static_comboDelay = static_defaultComboDelay;
-        AnimComplete = false;
     }
 
     public override void OnExit()
     {
         base.OnExit();
-
-        AnimComplete = false;
     }
 
     public override void OnUpdate()

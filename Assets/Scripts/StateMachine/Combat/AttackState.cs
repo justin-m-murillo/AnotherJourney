@@ -13,9 +13,15 @@ public class AttackState : CombatState
     public override void OnEnter()
     {
         base.OnEnter();
-        
+
+        if (_psm.IsGrounded())
+        {
+            ApplyGroundDrag(3f);
+            AttackPush();
+        }
         static_comboDuration = static_defaultComboDuration;
         _psm.Anim.TriggerAttack(name);
+        
         static_comboIndex++;
     }
 
@@ -27,6 +33,10 @@ public class AttackState : CombatState
 
     private void AttackPush()
     {
-
+        float facing = static_isFacingRight ? 1f : -1f;
+        Debug.Log("isFacing: " + static_isFacingRight);
+        Vector2 vel = _psm.RigBody.velocity;
+        vel.x += facing * _psm.AttackPushValue;
+        _psm.RigBody.velocity = vel;
     }
 }
