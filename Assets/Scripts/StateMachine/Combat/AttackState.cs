@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class AttackState : CombatState
 {
@@ -14,9 +11,9 @@ public class AttackState : CombatState
     {
         base.OnEnter();
 
-        if (_psm.IsGrounded())
+        if (Grounded.IsGrounded())
         {
-            ApplyGroundDrag(3f);
+            Grounded.ApplyGroundDrag(3f);
             AttackPush();
         }
         static_comboDuration = static_defaultComboDuration;
@@ -33,8 +30,7 @@ public class AttackState : CombatState
 
     private void AttackPush()
     {
-        float facing = static_isFacingRight ? 1f : -1f;
-        Debug.Log("isFacing: " + static_isFacingRight);
+        float facing = Grounded.static_isFacingRight ? 1f : -1f;
         Vector2 vel = _psm.RigBody.velocity;
         vel.x += facing * _psm.AttackPushValue;
         _psm.RigBody.velocity = vel;

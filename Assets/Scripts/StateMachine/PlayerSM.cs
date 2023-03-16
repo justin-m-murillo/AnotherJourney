@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerSM : StateMachine
-{
+{ 
     [HideInInspector]
     public Idle idleState;
     [HideInInspector]
@@ -27,6 +27,15 @@ public class PlayerSM : StateMachine
     [HideInInspector]
     public AttackState[] attackStates;
 
+    [Tooltip("Character transform")]
+    [SerializeField] Transform _characterTransform;
+    [Tooltip("Ground layer mask")]
+    [SerializeField] LayerMask _groundLayer;
+    [Tooltip("Character rigidbody")]
+    [SerializeField] Rigidbody2D _rb;
+    [Tooltip("Character AnimController script (for animation control)")]
+    [SerializeField] AnimController _anim;
+
     [Tooltip("Character's default movement speed")]
     [SerializeField] float _defaultMovementSpeed;
     [Tooltip("Charater's default horizontal drag (grounded)")]
@@ -42,6 +51,26 @@ public class PlayerSM : StateMachine
     /// Horizontal input used to affect character's movement
     /// </summary>
     //public float HorizontalInput { get; set; }
+
+    /// <summary>
+    /// Character Transform property
+    /// </summary>
+    public Transform CharacterTransform { get; protected set; }
+
+    /// <summary>
+    /// World ground layer
+    /// </summary>
+    public LayerMask GroundLayer { get; protected set; }
+
+    /// <summary>
+    /// Character's Rigidbody2D property
+    /// </summary>
+    public Rigidbody2D RigBody { get; protected set; }
+
+    /// <summary>
+    /// Character's AnimController script object (for animation control)
+    /// </summary>
+    public AnimController Anim { get; protected set; }
 
     /// <summary>
     /// Character's movement speed (horizontally on ground)
@@ -103,6 +132,7 @@ public class PlayerSM : StateMachine
         };
 
         CharacterTransform = _characterTransform;
+        GroundLayer = _groundLayer;
         RigBody = _rb;
         Anim = _anim;
 
@@ -138,20 +168,11 @@ public class PlayerSM : StateMachine
         HorizontalInput = horizontalInput;
     }*/
 
-    /// <summary>
-    /// Adjusts the Rigidbody2D's gravityScale to GravityFall's value
-    /// </summary>
-    public void InvokeGravityScaler()
+    public static void ResetAttackParams()
     {
-        RigBody.gravityScale = GravityFall;
-    }
-
-    /// <summary>
-    /// Checks if the character's collider is touching the ground layer
-    /// </summary>
-    /// <returns>True if touching a ground layer, false otherwise</returns>
-    public bool IsGrounded()
-    {
-        return RigBody.IsTouchingLayers(_groundLayer);
+        CombatState.static_comboDuration = CombatState.static_defaultComboDuration;
+        CombatState.static_comboDelay = CombatState.static_defaultComboDelay;
+        CombatState.static_canAttack = true;
+        CombatState.static_comboIndex = 0;
     }
 }

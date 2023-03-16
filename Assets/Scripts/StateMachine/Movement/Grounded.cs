@@ -1,19 +1,22 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Grounded : ContainerState
+public class Grounded : MovementState
 {
     // to prevent double jump glitches 
-    public static float defaultJumpCooldown = 0.02f;
-    public static float jumpCooldown = defaultJumpCooldown; 
+    public static float static_defaultJumpCooldown = 0.02f;
+    public static float static_jumpCooldown = static_defaultJumpCooldown;
+
+    public static float static_horizontalInput;
+    public static bool static_isFacingRight;
 
     public Grounded(string name, PlayerSM stateMachine) : base(name, stateMachine)
     {
         _psm = (PlayerSM)stateMachine;
         static_horizontalInput = 0f;
-        playerControls.PlayerControlsMap.Jump.started += JumpStarted;
-        playerControls.PlayerControlsMap.Jump.performed += JumpPerformed;
-        playerControls.PlayerControlsMap.Jump.canceled += JumpCanceled;
+        static_isFacingRight = true;
+
+        
     }
 
     public override void OnEnter()
@@ -27,34 +30,32 @@ public class Grounded : ContainerState
 
         static_horizontalInput = playerControls.PlayerControlsMap.Move.ReadValue<Vector2>().x;
 
-        if (_psm.IsGrounded())
+        if (IsGrounded())
         {
             _psm.RigBody.gravityScale = _psm.GravityStored;
         }
 
         //Debug.Log(jumpCooldown.ToString("F3"));
-        jumpCooldown = jumpCooldown > 0 ? 
-            jumpCooldown - Time.deltaTime
+        static_jumpCooldown = static_jumpCooldown > 0 ? 
+            static_jumpCooldown - Time.deltaTime
             : 0f;
     }
 
-    public void JumpStarted(InputAction.CallbackContext context)
+    /// <summary>
+    /// Checks if the character's collider is touching the ground layer
+    /// </summary>
+    /// <returns>True if touching a ground layer, false otherwise</returns>
+    public static bool IsGrounded()
     {
-        if (jumpCooldown > 0f) return;
-        if (!_psm.IsGrounded()) return;
-        
-        stateMachine.ChangeState(_psm.jumpState);
+        return _psm.RigBody.IsTouchingLayers(_psm.GroundLayer);
     }
 
-    public void JumpPerformed(InputAction.CallbackContext context)
+    public static void ApplyGroundDrag(float mult = 1f)
     {
-        if (context.started)
-            _psm.JumpPerformed = true;
-    }
-
-    public void JumpCanceled(InputAction.CallbackContext context)
-    {
-        if (!context.performed)
-            _psm.InvokeGravityScaler();
+        // To eliminate sliding when approaching rest
+        _psm.RigBody.AddForce(new Vector2
+            (-(_psm.RigBody.velocity.x * (_psm.DragFactor * mult)), 0),
+            ForceMode2D.Force
+        );
     }
 }

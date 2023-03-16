@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class Jump : ContainerState
+public class Jump : MovementState
 {
     protected PlayerSM _movementSM;
     private float _prevY;
@@ -37,6 +38,4 @@ public class Jump : ContainerState
         }
         _prevY = _movementSM.RigBody.position.y;
     }
-
-
 }

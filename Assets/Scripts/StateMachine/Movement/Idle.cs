@@ -14,6 +14,7 @@ public class Idle : Grounded
         base.OnEnter();
 
         //_psm.HorizontalInput = 0f;
+        PlayerSM.ResetAttackParams();
         _psm.Anim.TriggerIdle();
     }
 

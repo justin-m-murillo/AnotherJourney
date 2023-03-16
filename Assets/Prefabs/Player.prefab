@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2514173954286973708}
   - component: {fileID: 2514173954286973706}
   - component: {fileID: 2514173954286973709}
-  - component: {fileID: 2336022010900797369}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -120,19 +119,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _anim: {fileID: 2514173954286973706}
---- !u!114 &2336022010900797369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2514173954286973710}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aca36ed1e3a117a45af3a4984277bdc0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _psm: {fileID: 8037024654266756644}
 --- !u!1 &2514173954590323128
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,6 +275,7 @@ MonoBehaviour:
   _rb: {fileID: 2514173954590323078}
   _anim: {fileID: 2514173954286973709}
   _defaultMovementSpeed: 8
-  _defaultDragFactor: 10
-  _defaultJumpForce: 8
-  _defaultGravityFall: 8
+  _defaultDragFactor: 12
+  _defaultJumpForce: 16
+  _defaultGravityFall: 7
+  _attackPush: 4

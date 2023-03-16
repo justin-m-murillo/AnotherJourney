@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Falling : ContainerState
+public class Falling : MovementState
 {
     protected PlayerSM _movementSM;
     public Falling(PlayerSM stateMachine) : base("Falling", stateMachine) 
@@ -21,16 +21,24 @@ public class Falling : ContainerState
     {
         base.OnExit();
 
-        Grounded.jumpCooldown = Grounded.defaultJumpCooldown;
+        Grounded.static_jumpCooldown = Grounded.static_defaultJumpCooldown;
     }
 
     public override void OnUpdate()
     {
         base.OnUpdate();
 
-        if (_movementSM.IsGrounded())
+        if (Grounded.IsGrounded())
         {
             stateMachine.ChangeState(_movementSM.movingState);
         }
+    }
+
+    /// <summary>
+    /// Adjusts the Rigidbody2D's gravityScale to GravityFall's value
+    /// </summary>
+    public static void InvokeGravityScalar()
+    {
+        _psm.RigBody.gravityScale = _psm.GravityFall;
     }
 }

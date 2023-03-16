@@ -18,7 +18,6 @@ public class AnimController : MonoBehaviour
 
     public void TriggerAttack(string attackName)
     {
-        Debug.Log(attackName); 
         _anim.SetTrigger(attackName);
     }
 }
