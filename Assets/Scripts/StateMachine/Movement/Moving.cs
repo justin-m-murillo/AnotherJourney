@@ -13,8 +13,7 @@ public class Moving : Grounded
     {
         base.OnEnter();
 
-        _psm.HorizontalInput = 0f;
-
+        //_psm.HorizontalInput = 0f;
         _psm.Anim.TriggerMove();
     }
 

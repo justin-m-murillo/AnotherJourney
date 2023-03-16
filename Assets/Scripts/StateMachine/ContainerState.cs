@@ -12,6 +12,8 @@ public class ContainerState : BaseState
 
     protected static int static_comboIndex = 0;
 
+    protected float _horizontalInput;
+
     protected PlayerSM _psm;
     protected PlayerControls playerControls = new();
 

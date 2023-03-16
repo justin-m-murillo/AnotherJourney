@@ -23,6 +23,10 @@ public class AttackState : CombatState
     {
         base.OnUpdate();
 
-        
+    }
+
+    private void AttackPush()
+    {
+
     }
 }

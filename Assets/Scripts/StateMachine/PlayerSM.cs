@@ -39,7 +39,7 @@ public class PlayerSM : StateMachine
     /// <summary>
     /// Horizontal input used to affect character's movement
     /// </summary>
-    public float HorizontalInput { get; set; }
+    //public float HorizontalInput { get; set; }
 
     /// <summary>
     /// Character's movement speed (horizontally on ground)
@@ -99,7 +99,7 @@ public class PlayerSM : StateMachine
         RigBody = _rb;
         Anim = _anim;
 
-        HorizontalInput = 0f;
+        //HorizontalInput = 0f;
         MovementSpeed = _defaultMovementSpeed;
         DragFactor = _defaultDragFactor;
 
@@ -123,11 +123,11 @@ public class PlayerSM : StateMachine
     /// Sets the horizontal input used to control the character's horizontal movement
     /// </summary>
     /// <param name="horizontalInput"></param>
-    public void SetHorizontalInput(float horizontalInput)
+    /*public void SetHorizontalInput(float horizontalInput)
     {
         //if (!IsGrounded()) return;
         HorizontalInput = horizontalInput;
-    }
+    }*/
 
     /// <summary>
     /// Adjusts the Rigidbody2D's gravityScale to GravityFall's value

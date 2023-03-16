@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class Grounded : ContainerState
 {
-    protected float _horizontalInput;
+    
 
     // to prevent double jump glitches 
     public static float defaultJumpCooldown = 0.02f;
