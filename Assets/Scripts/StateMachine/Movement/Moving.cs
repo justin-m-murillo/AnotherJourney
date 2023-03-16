@@ -4,18 +4,18 @@ public class Moving : Grounded
 {
     private bool isFacingRight = true;
 
-    public Moving(MovementSM stateMachine) : base("Moving", stateMachine) 
+    public Moving(PlayerSM stateMachine) : base("Moving", stateMachine) 
     {
-        _movementSM = (MovementSM)stateMachine;
+        _psm = (PlayerSM)stateMachine;
     }
 
     public override void OnEnter()
     {
         base.OnEnter();
 
-        _movementSM.HorizontalInput = 0f;
+        _psm.HorizontalInput = 0f;
 
-        _movementSM.Anim.TriggerMove();
+        _psm.Anim.TriggerMove();
     }
 
     public override void OnUpdate()
@@ -33,7 +33,7 @@ public class Moving : Grounded
 
         if (Mathf.Abs(_horizontalInput) < Mathf.Epsilon)
         {
-            stateMachine.ChangeState(_movementSM.idleState);
+            stateMachine.ChangeState(_psm.idleState);
         }
     }
 
@@ -41,16 +41,16 @@ public class Moving : Grounded
     {
         base.OnFixedUpdate();
 
-        Vector2 vel = _movementSM.RigBody.velocity;
-        vel.x = _horizontalInput * _movementSM.MovementSpeed;
-        _movementSM.RigBody.velocity = vel;
+        Vector2 vel = _psm.RigBody.velocity;
+        vel.x = _horizontalInput * _psm.MovementSpeed;
+        _psm.RigBody.velocity = vel;
     }
 
     private void Flip()
     {
         isFacingRight = !isFacingRight;
-        Vector3 localScale = _movementSM.CharacterTransform.localScale;
+        Vector3 localScale = _psm.CharacterTransform.localScale;
         localScale.x *= -1f;
-        _movementSM.CharacterTransform.localScale = localScale;
+        _psm.CharacterTransform.localScale = localScale;
     }
 }

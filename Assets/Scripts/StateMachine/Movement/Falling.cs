@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Falling : BaseState
 {
-    protected MovementSM _movementSM;
-    public Falling(MovementSM stateMachine) : base("Falling", stateMachine) 
+    protected PlayerSM _movementSM;
+    public Falling(PlayerSM stateMachine) : base("Falling", stateMachine) 
     { 
-        _movementSM = (MovementSM)stateMachine;
+        _movementSM = (PlayerSM)stateMachine;
     }
 
     public override void OnEnter()

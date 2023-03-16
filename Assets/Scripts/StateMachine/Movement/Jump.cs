@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Jump : BaseState
 {
-    protected MovementSM _movementSM;
+    protected PlayerSM _movementSM;
     private float _prevY;
     private float _yDiff;
 
-    public Jump(MovementSM stateMachine) : base("Jump", stateMachine) 
+    public Jump(PlayerSM stateMachine) : base("Jump", stateMachine) 
     {
-        _movementSM = (MovementSM)stateMachine;
+        _movementSM = (PlayerSM)stateMachine;
     }
 
     public override void OnEnter()

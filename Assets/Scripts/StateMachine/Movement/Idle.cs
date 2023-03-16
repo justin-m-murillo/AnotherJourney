@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class Idle : Grounded
 {
-    public Idle(MovementSM stateMachine) : base("Idle", stateMachine) 
+    public Idle(PlayerSM stateMachine) : base("Idle", stateMachine) 
     {
-        _movementSM = (MovementSM)stateMachine;
+        _psm = (PlayerSM)stateMachine;
     }
 
     public override void OnEnter()
     {
         base.OnEnter();
 
-        _movementSM.HorizontalInput = 0f;
+        _psm.HorizontalInput = 0f;
 
-        _movementSM.Anim.TriggerIdle();
+        _psm.Anim.TriggerIdle();
     }
 
     public override void OnUpdate()
@@ -24,7 +24,7 @@ public class Idle : Grounded
 
         if (Mathf.Abs(_horizontalInput) > Mathf.Epsilon)
         {
-            stateMachine.ChangeState(_movementSM.movingState);
+            stateMachine.ChangeState(_psm.movingState);
         }
     }
 
@@ -33,8 +33,8 @@ public class Idle : Grounded
         base.OnFixedUpdate();
 
         // To eliminate sliding when approaching rest
-        _movementSM.RigBody.AddForce(new Vector2
-            (-(_movementSM.RigBody.velocity.x * _movementSM.DragFactor), 0),
+        _psm.RigBody.AddForce(new Vector2
+            (-(_psm.RigBody.velocity.x * _psm.DragFactor), 0),
             ForceMode2D.Force
         );
     }
