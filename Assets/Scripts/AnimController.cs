@@ -15,4 +15,10 @@ public class AnimController : MonoBehaviour
     public void TriggerJump() { _anim.SetTrigger("Jump"); }
 
     public void TriggerFalling() { _anim.SetTrigger("Falling"); }
+
+    public void TriggerAttack(string attackName)
+    {
+        Debug.Log(attackName); 
+        _anim.SetTrigger(attackName);
+    }
 }

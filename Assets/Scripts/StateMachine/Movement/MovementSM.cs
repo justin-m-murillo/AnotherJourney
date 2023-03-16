@@ -13,15 +13,6 @@ public class MovementSM : StateMachine
     [HideInInspector]
     public Falling fallingState;
 
-    [Tooltip("Character transform")]
-    [SerializeField] protected Transform _characterTransform;
-    [Tooltip("Ground layer mask")]
-    [SerializeField] protected LayerMask _groundLayer;
-    [Tooltip("Character rigidbody")]
-    [SerializeField] protected Rigidbody2D _rb;
-    [Tooltip("Character AnimController script (for animation control)")]
-    [SerializeField] protected AnimController _anim;
-
     [Tooltip("Character's default movement speed")]
     [SerializeField] float _defaultMovementSpeed;
     [Tooltip("Charater's default horizontal drag (grounded)")]
@@ -30,21 +21,6 @@ public class MovementSM : StateMachine
     [SerializeField] float _defaultJumpForce;
     [Tooltip("Character's default gravity scale when falling (to fall faster)")]
     [SerializeField] float _defaultGravityFall;
-
-    /// <summary>
-    /// Character Transform property
-    /// </summary>
-    public Transform CharacterTransform { get; private set; }
-    
-    /// <summary>
-    /// Character's Rigidbody2D property
-    /// </summary>
-    public Rigidbody2D RigBody { get; private set; }
-
-    /// <summary>
-    /// Character's AnimController script object (for animation control)
-    /// </summary>
-    public AnimController Anim { get; private set; }
 
     /// <summary>
     /// Horizontal input used to affect character's movement

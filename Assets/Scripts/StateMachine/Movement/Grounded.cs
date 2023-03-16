@@ -35,7 +35,7 @@ public class Grounded : BaseState
             _movementSM.RigBody.gravityScale = _movementSM.GravityStored;
         }
 
-        Debug.Log(jumpCooldown.ToString("F3"));
+        //Debug.Log(jumpCooldown.ToString("F3"));
         jumpCooldown = jumpCooldown > 0 ? 
             jumpCooldown - Time.deltaTime
             : 0f;

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2514173954286973708}
   - component: {fileID: 2514173954286973706}
   - component: {fileID: 2514173954286973709}
+  - component: {fileID: 2336022010900797369}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -119,6 +120,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _anim: {fileID: 2514173954286973706}
+--- !u!114 &2336022010900797369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2514173954286973710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aca36ed1e3a117a45af3a4984277bdc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _csm: {fileID: 1038449772}
 --- !u!1 &2514173954590323128
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,6 +147,7 @@ GameObject:
   - component: {fileID: 2514173954590323077}
   - component: {fileID: 7453179596225468221}
   - component: {fileID: 1435395113}
+  - component: {fileID: 1038449772}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -249,19 +264,7 @@ MonoBehaviour:
     m_ActionId: dc49fead-78c1-470d-9f4b-e81fb52344b1
     m_ActionName: PlayerControlsMap/Jump[/Keyboard/space]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
-        m_MethodName: AttackInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: bab0b3ff-19f8-445e-9b0e-308bb6f8e8a8
     m_ActionName: PlayerControlsMap/Attack[/Keyboard/j]
   m_NeverAutoSwitchControlSchemes: 0
@@ -312,3 +315,21 @@ MonoBehaviour:
   - Attack3
   - Attack4
   - Attack5
+--- !u!114 &1038449772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2514173954590323128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3af27d373b9da034eb027a5b93503e67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _characterTransform: {fileID: 2514173954590323129}
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  _rb: {fileID: 2514173954590323078}
+  _anim: {fileID: 2514173954286973709}
