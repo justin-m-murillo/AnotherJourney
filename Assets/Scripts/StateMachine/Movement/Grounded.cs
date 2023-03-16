@@ -1,9 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Grounded : BaseState
+public class Grounded : ContainerState
 {
-    protected PlayerSM _psm;
     protected float _horizontalInput;
 
     // to prevent double jump glitches 
@@ -14,9 +13,9 @@ public class Grounded : BaseState
     {
         _psm = (PlayerSM)stateMachine;
         _horizontalInput = 0f;
-        controls.PlayerControlsMap.Jump.started += JumpStarted;
-        controls.PlayerControlsMap.Jump.performed += JumpPerformed;
-        controls.PlayerControlsMap.Jump.canceled += JumpCanceled;
+        playerControls.PlayerControlsMap.Jump.started += JumpStarted;
+        playerControls.PlayerControlsMap.Jump.performed += JumpPerformed;
+        playerControls.PlayerControlsMap.Jump.canceled += JumpCanceled;
     }
 
     public override void OnEnter()
@@ -28,7 +27,7 @@ public class Grounded : BaseState
     {
         base.OnUpdate();
 
-        _horizontalInput = controls.PlayerControlsMap.Move.ReadValue<Vector2>().x;
+        _horizontalInput = playerControls.PlayerControlsMap.Move.ReadValue<Vector2>().x;
 
         if (_psm.IsGrounded())
         {

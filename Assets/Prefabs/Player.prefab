@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aca36ed1e3a117a45af3a4984277bdc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _csm: {fileID: 1038449772}
+  _psm: {fileID: 0}
 --- !u!1 &2514173954590323128
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,9 +145,7 @@ GameObject:
   - component: {fileID: 2514173954590323078}
   - component: {fileID: 2514173954590323079}
   - component: {fileID: 2514173954590323077}
-  - component: {fileID: 7453179596225468221}
-  - component: {fileID: 1435395113}
-  - component: {fileID: 1038449772}
+  - component: {fileID: 8037024654266756644}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -272,7 +270,7 @@ MonoBehaviour:
   m_DefaultActionMap: PlayerControlsMap
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &7453179596225468221
+--- !u!114 &8037024654266756644
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -281,55 +279,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2514173954590323128}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26183a12b7656154d90bf823a069c8c5, type: 3}
+  m_Script: {fileID: 11500000, guid: 4083812f43b88904ca20af5f86f78eee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterTransform: {fileID: 2514173954590323129}
+  _characterTransform: {fileID: 0}
   _groundLayer:
     serializedVersion: 2
-    m_Bits: 256
-  _rb: {fileID: 2514173954590323078}
-  _anim: {fileID: 2514173954286973709}
+    m_Bits: 0
+  _rb: {fileID: 0}
+  _anim: {fileID: 0}
   _defaultMovementSpeed: 8
-  _defaultDragFactor: 4
+  _defaultDragFactor: 5
   _defaultJumpForce: 8
   _defaultGravityFall: 8
---- !u!114 &1435395113
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2514173954590323128}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 603c93c4f3e0b25489c265b8ba929d9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _anim: {fileID: 2514173954286973706}
-  _comboDuration: 0.4
-  _comboDelay: 0.15
-  _meleeComboMoves:
-  - Attack1
-  - Attack2
-  - Attack3
-  - Attack4
-  - Attack5
---- !u!114 &1038449772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2514173954590323128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3af27d373b9da034eb027a5b93503e67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _characterTransform: {fileID: 2514173954590323129}
-  _groundLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  _rb: {fileID: 2514173954590323078}
-  _anim: {fileID: 2514173954286973709}

@@ -5,18 +5,24 @@ using UnityEngine.InputSystem;
 
 public class AttackState : CombatState
 {
-    public AttackState(CombatSM stateMachine, int index, bool hasNext) : base("Attack" + index, stateMachine)
+    public AttackState(PlayerSM stateMachine, int index) : base("Attack" + (index + 1), stateMachine)
     {
-        _combatSM = (CombatSM)stateMachine;
-        hasNextCombo = hasNext;
-        comboIndex = index;
+        _psm = (PlayerSM)stateMachine;
     }
 
     public override void OnEnter()
     {
         base.OnEnter();
+        
+        static_comboDuration = static_defaultComboDuration;
+        _psm.Anim.TriggerAttack(name);
+        static_comboIndex++;
+    }
 
-        comboDuration = defaultComboDuration;
-        _combatSM.Anim.TriggerAttack(name);
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+
+        
     }
 }

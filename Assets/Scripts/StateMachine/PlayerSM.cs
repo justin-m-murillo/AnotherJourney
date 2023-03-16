@@ -13,6 +13,20 @@ public class PlayerSM : StateMachine
     [HideInInspector]
     public Falling fallingState;
 
+    [HideInInspector]
+    public AttackState attackOne;
+    [HideInInspector]
+    public AttackState attackTwo;
+    [HideInInspector]
+    public AttackState attackThree;
+    [HideInInspector]
+    public AttackState attackFour;
+    [HideInInspector]
+    public AttackState attackFive;
+
+    [HideInInspector]
+    public AttackState[] attackStates;
+
     [Tooltip("Character's default movement speed")]
     [SerializeField] float _defaultMovementSpeed;
     [Tooltip("Charater's default horizontal drag (grounded)")]
@@ -65,6 +79,21 @@ public class PlayerSM : StateMachine
         movingState = new Moving(this);
         jumpState = new Jump(this);
         fallingState = new Falling(this);
+
+        attackOne   = new(this, 0);
+        attackTwo   = new(this, 1);
+        attackThree = new(this, 2);
+        attackFour  = new(this, 3);
+        attackFive  = new(this, 4);
+
+        attackStates = new AttackState[]
+        {
+            attackOne, 
+            attackTwo, 
+            attackThree, 
+            attackFour, 
+            attackFive
+        };
 
         CharacterTransform = _characterTransform;
         RigBody = _rb;

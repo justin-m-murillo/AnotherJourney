@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Falling : BaseState
+public class Falling : ContainerState
 {
     protected PlayerSM _movementSM;
     public Falling(PlayerSM stateMachine) : base("Falling", stateMachine) 

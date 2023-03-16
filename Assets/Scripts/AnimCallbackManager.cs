@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class AnimCallbackManager : MonoBehaviour
 {
-    [SerializeField] CombatSM _csm;
+    [SerializeField] PlayerSM _psm;
 
     public void CallbackAttackAnimComplete(int index)
     {
-        _csm.attackStates[index].AnimComplete = true;
+        //_psm.attackStates[index].AnimComplete = true;
     }
 }

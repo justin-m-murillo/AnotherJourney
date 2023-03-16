@@ -1,26 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class CombatState : BaseState
+public class CombatState : ContainerState
 {
-    protected CombatSM _combatSM;
-
-    protected static float defaultComboDuration = 0.7f;
-    protected static float comboDuration = defaultComboDuration;
-    
-    protected int comboIndex;
-
-    protected bool hasNextCombo;
-
     public bool AnimComplete { get; set; }
 
-    public CombatState(string name, CombatSM stateMachine) : base(name, stateMachine)
+    public CombatState(string name, PlayerSM stateMachine) : base(name, stateMachine)
     {
-        _combatSM = (CombatSM)stateMachine;
+        _psm = (PlayerSM)stateMachine;
 
-        controls.PlayerControlsMap.Attack.started += AttackStarted;
         //controls.PlayerControlsMap.Attack.performed += AttackPerformed;
         //controls.PlayerControlsMap.Attack.canceled += AttackCanceled;
     }
@@ -29,6 +16,8 @@ public class CombatState : BaseState
     {
         base.OnEnter();
 
+        static_canAttack = false;
+        static_comboDelay = static_defaultComboDelay;
         AnimComplete = false;
     }
 
@@ -43,25 +32,29 @@ public class CombatState : BaseState
     {
         base.OnUpdate();
 
-        comboDuration = comboDuration > 0 ?
-            comboDuration - Time.deltaTime
+        static_comboDelay = static_comboDelay > 0 ?
+            static_comboDelay - Time.deltaTime
             : 0;
 
-        if (comboDuration == 0)
+        if (static_comboDelay == 0)
         {
-            stateMachine.ChangeState(_combatSM.combatIdleState);
+            static_canAttack = true;
+        }
+
+        static_comboDuration = static_comboDuration > 0 ?
+            static_comboDuration - Time.deltaTime
+            : 0;
+
+        if (static_comboDuration == 0)
+        {
+            static_comboIndex = 0;
+            stateMachine.ChangeState(_psm.idleState);
         }
     }
 
-    public int Index() { return comboIndex; }
+    public int Index() { return static_comboIndex; }
 
-    public void AttackStarted(InputAction.CallbackContext context) 
-    {
-        if (!AnimComplete) return;
-        if (comboIndex+1 > _combatSM.attackStates.Length - 1) return;
-
-        stateMachine.ChangeState(_combatSM.attackStates[comboIndex+1]);
-    }
+    
     //public void AttackPerformed(InputAction.CallbackContext context) { }
     //public virtual void AttackCanceled(InputAction.CallbackContext context) { }
 

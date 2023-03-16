@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Jump : BaseState
+public class Jump : ContainerState
 {
     protected PlayerSM _movementSM;
     private float _prevY;
