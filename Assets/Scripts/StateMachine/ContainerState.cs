@@ -23,31 +23,6 @@ public class ContainerState : BaseState
         playerControls.PlayerControlsMap.Attack.started += AttackStarted;
     }
 
-    public override void OnEnter()
-    {
-        base.OnEnter();
-    }
-
-    public override void OnExit()
-    {
-        base.OnExit();
-    }
-
-    public override void OnUpdate()
-    {
-        base.OnUpdate();
-    }
-
-    public override void OnFixedUpdate()
-    {
-        base.OnFixedUpdate();
-    }
-
-    public override void OnLateUpdate()
-    {
-        base.OnLateUpdate();
-    }
-
     public void AttackStarted(InputAction.CallbackContext context)
     {
         if (!static_canAttack) return;
