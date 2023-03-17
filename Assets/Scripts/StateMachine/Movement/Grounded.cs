@@ -3,20 +3,11 @@ using UnityEngine.InputSystem;
 
 public class Grounded : MovementState
 {
-    // to prevent double jump glitches 
-    public static float static_defaultJumpCooldown = 0.02f;
-    public static float static_jumpCooldown = static_defaultJumpCooldown;
-
-    public static float static_horizontalInput;
-    public static bool static_isFacingRight;
-
     public Grounded(string name, PlayerSM stateMachine) : base(name, stateMachine)
     {
         _psm = (PlayerSM)stateMachine;
-        static_horizontalInput = 0f;
-        static_isFacingRight = true;
-
-        
+        _psm.psl.horizontalInput = 0f;
+        _psm.psl.isFacingRight = true;
     }
 
     public override void OnEnter()
@@ -28,7 +19,7 @@ public class Grounded : MovementState
     {
         base.OnUpdate();
 
-        static_horizontalInput = playerControls.PlayerControlsMap.Move.ReadValue<Vector2>().x;
+        _psm.psl.horizontalInput = playerControls.PlayerControlsMap.Move.ReadValue<Vector2>().x;
 
         if (IsGrounded())
         {
@@ -36,8 +27,8 @@ public class Grounded : MovementState
         }
 
         //Debug.Log(jumpCooldown.ToString("F3"));
-        static_jumpCooldown = static_jumpCooldown > 0 ? 
-            static_jumpCooldown - Time.deltaTime
+        _psm.psl.jumpCooldown = _psm.psl.jumpCooldown > 0 ? 
+            _psm.psl.jumpCooldown - Time.deltaTime
             : 0f;
     }
 

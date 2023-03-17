@@ -16,10 +16,11 @@ public class AttackState : CombatState
             Grounded.ApplyGroundDrag(3f);
             AttackPush();
         }
-        static_comboDuration = static_defaultComboDuration;
+        _psm.psl.comboDuration = _psm.psl.defaultComboDuration;
+        _psm.psl.comboDelay = _psm.psl.defaultComboDelay;
         _psm.Anim.TriggerAttack(name);
         
-        static_comboIndex++;
+        _psm.psl.comboIndex++;
     }
 
     public override void OnUpdate()
@@ -30,7 +31,7 @@ public class AttackState : CombatState
 
     private void AttackPush()
     {
-        float facing = Grounded.static_isFacingRight ? 1f : -1f;
+        float facing = _psm.psl.isFacingRight ? 1f : -1f;
         Vector2 vel = _psm.RigBody.velocity;
         vel.x += facing * _psm.AttackPushValue;
         _psm.RigBody.velocity = vel;

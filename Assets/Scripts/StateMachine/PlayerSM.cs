@@ -27,6 +27,8 @@ public class PlayerSM : StateMachine
     [HideInInspector]
     public AttackState[] attackStates;
 
+    [Tooltip("Player Static Library contains all static variables required for this state machine")]
+    public PlayerStatics psl;
     [Tooltip("Character transform")]
     [SerializeField] Transform _characterTransform;
     [Tooltip("Ground layer mask")]
@@ -168,11 +170,5 @@ public class PlayerSM : StateMachine
         HorizontalInput = horizontalInput;
     }*/
 
-    public static void ResetAttackParams()
-    {
-        CombatState.static_comboDuration = CombatState.static_defaultComboDuration;
-        CombatState.static_comboDelay = CombatState.static_defaultComboDelay;
-        CombatState.static_canAttack = true;
-        CombatState.static_comboIndex = 0;
-    }
+    
 }

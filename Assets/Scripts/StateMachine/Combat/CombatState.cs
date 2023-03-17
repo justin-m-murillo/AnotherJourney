@@ -2,14 +2,6 @@ using UnityEngine;
 
 public class CombatState : ContainerState
 {
-    public static float static_defaultComboDuration = 0.7f;
-    public static float static_comboDuration = static_defaultComboDuration;
-
-    public static float static_defaultComboDelay = 0.3f;
-    public static float static_comboDelay = static_defaultComboDelay;
-    public static bool static_canAttack = true;
-    public static int static_comboIndex = 0;
-
     public CombatState(string name, PlayerSM stateMachine) : base(name, stateMachine)
     {
         _psm = (PlayerSM)stateMachine;
@@ -23,7 +15,7 @@ public class CombatState : ContainerState
         base.OnEnter();
 
         //static_canAttack = false;
-        static_comboDelay = static_defaultComboDelay;
+        _psm.psl.jumpCooldown = _psm.psl.defaultJumpCooldown;
     }
 
     public override void OnExit()
@@ -35,27 +27,27 @@ public class CombatState : ContainerState
     {
         base.OnUpdate();
 
-        static_comboDelay = static_comboDelay > 0 ?
-            static_comboDelay - Time.deltaTime
+        _psm.psl.comboDelay = _psm.psl.comboDelay > 0 ?
+            _psm.psl.comboDelay - Time.deltaTime
             : 0;
 
-        if (static_comboDelay == 0)
+        if (_psm.psl.comboDelay == 0)
         {
-            static_canAttack = true;
+            _psm.psl.canAttack = true;
         }
 
-        static_comboDuration = static_comboDuration > 0 ?
-            static_comboDuration - Time.deltaTime
+        _psm.psl.comboDuration = _psm.psl.comboDuration > 0 ?
+            _psm.psl.comboDuration - Time.deltaTime
             : 0;
 
-        if (static_comboDuration == 0)
+        if (_psm.psl.comboDuration == 0)
         {
-            CombatState.static_comboIndex = 0;
+            _psm.psl.comboIndex = 0;
             stateMachine.ChangeState(_psm.idleState);
         }
     }
 
-    public int Index() { return CombatState.static_comboIndex; }
+    public int Index() { return _psm.psl.comboIndex; }
 
     
     //public void AttackPerformed(InputAction.CallbackContext context) { }

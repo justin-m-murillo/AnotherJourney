@@ -4,24 +4,23 @@ using UnityEngine;
 
 public class Falling : MovementState
 {
-    protected PlayerSM _movementSM;
     public Falling(PlayerSM stateMachine) : base("Falling", stateMachine) 
     { 
-        _movementSM = (PlayerSM)stateMachine;
+        _psm = (PlayerSM)stateMachine;
     }
 
     public override void OnEnter()
     {
         base.OnEnter();
 
-        _movementSM.Anim.TriggerFalling();
+        _psm.Anim.TriggerFalling();
     }
 
     public override void OnExit()
     {
         base.OnExit();
 
-        Grounded.static_jumpCooldown = Grounded.static_defaultJumpCooldown;
+        _psm.psl.jumpCooldown = _psm.psl.defaultJumpCooldown;
     }
 
     public override void OnUpdate()
@@ -30,7 +29,7 @@ public class Falling : MovementState
 
         if (Grounded.IsGrounded())
         {
-            stateMachine.ChangeState(_movementSM.movingState);
+            stateMachine.ChangeState(_psm.movingState);
         }
     }
 

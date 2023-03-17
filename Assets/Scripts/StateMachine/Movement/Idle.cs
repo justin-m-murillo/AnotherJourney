@@ -13,8 +13,7 @@ public class Idle : Grounded
     {
         base.OnEnter();
 
-        //_psm.HorizontalInput = 0f;
-        PlayerSM.ResetAttackParams();
+        _psm.psl.ResetAttackParams();
         _psm.Anim.TriggerIdle();
     }
 
@@ -22,7 +21,7 @@ public class Idle : Grounded
     {
         base.OnUpdate();
 
-        if (Mathf.Abs(static_horizontalInput) > Mathf.Epsilon)
+        if (Mathf.Abs(_psm.psl.horizontalInput) > Mathf.Epsilon)
         {
             stateMachine.ChangeState(_psm.movingState);
         }

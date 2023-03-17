@@ -21,4 +21,5 @@ public class BaseState
     public virtual void OnLateUpdate() { }
     public virtual void OnExit() { }
 
+    public StateMachine GetStateMachine() { return stateMachine; }
 }

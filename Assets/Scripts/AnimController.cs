@@ -20,4 +20,6 @@ public class AnimController : MonoBehaviour
     {
         _anim.SetTrigger(attackName);
     }
+
+    public void TriggerBow() { _anim.SetTrigger("Bow"); }
 }
