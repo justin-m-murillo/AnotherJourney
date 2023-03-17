@@ -27,7 +27,7 @@ public class Falling : MovementState
     {
         base.OnUpdate();
 
-        if (Grounded.IsGrounded())
+        if (_psm.psl.IsGrounded(_psm.RigBody, _psm.GroundLayer))
         {
             stateMachine.ChangeState(_psm.movingState);
         }

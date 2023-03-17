@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimController : MonoBehaviour
+public class AnimController : ScriptableObject
 {
-    //[SerializeField] CharMoveController _cmc;
-
-    [SerializeField] Animator _anim;
+    private Animator _anim;
     
+    public void SetAnimator(Animator anim) { _anim = anim; }
+
     public void TriggerIdle() { _anim.SetTrigger("Idle"); }
 
     public void TriggerMove() { _anim.SetTrigger("Moving"); }
@@ -21,5 +19,7 @@ public class AnimController : MonoBehaviour
         _anim.SetTrigger(attackName);
     }
 
-    public void TriggerBow() { _anim.SetTrigger("Bow"); }
+    public void TriggerBowDraw() { _anim.SetTrigger("BowDraw"); }
+
+    public void TriggerBowRelease() { _anim.SetTrigger("BowRelease"); }
 }

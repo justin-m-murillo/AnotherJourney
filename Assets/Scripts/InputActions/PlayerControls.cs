@@ -53,6 +53,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Bow"",
+                    ""type"": ""Button"",
+                    ""id"": ""f3ac69d2-e28e-4137-8c6f-d5f8d3ca70e9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -110,6 +119,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a3371c38-cc01-46e7-a841-6e3aa1126261"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Bow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -121,6 +141,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerControlsMap_Move = m_PlayerControlsMap.FindAction("Move", throwIfNotFound: true);
         m_PlayerControlsMap_Jump = m_PlayerControlsMap.FindAction("Jump", throwIfNotFound: true);
         m_PlayerControlsMap_Attack = m_PlayerControlsMap.FindAction("Attack", throwIfNotFound: true);
+        m_PlayerControlsMap_Bow = m_PlayerControlsMap.FindAction("Bow", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -183,6 +204,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerControlsMap_Move;
     private readonly InputAction m_PlayerControlsMap_Jump;
     private readonly InputAction m_PlayerControlsMap_Attack;
+    private readonly InputAction m_PlayerControlsMap_Bow;
     public struct PlayerControlsMapActions
     {
         private @PlayerControls m_Wrapper;
@@ -190,6 +212,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_PlayerControlsMap_Move;
         public InputAction @Jump => m_Wrapper.m_PlayerControlsMap_Jump;
         public InputAction @Attack => m_Wrapper.m_PlayerControlsMap_Attack;
+        public InputAction @Bow => m_Wrapper.m_PlayerControlsMap_Bow;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControlsMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -208,6 +231,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Attack.started -= m_Wrapper.m_PlayerControlsMapActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_PlayerControlsMapActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_PlayerControlsMapActionsCallbackInterface.OnAttack;
+                @Bow.started -= m_Wrapper.m_PlayerControlsMapActionsCallbackInterface.OnBow;
+                @Bow.performed -= m_Wrapper.m_PlayerControlsMapActionsCallbackInterface.OnBow;
+                @Bow.canceled -= m_Wrapper.m_PlayerControlsMapActionsCallbackInterface.OnBow;
             }
             m_Wrapper.m_PlayerControlsMapActionsCallbackInterface = instance;
             if (instance != null)
@@ -221,6 +247,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
+                @Bow.started += instance.OnBow;
+                @Bow.performed += instance.OnBow;
+                @Bow.canceled += instance.OnBow;
             }
         }
     }
@@ -230,5 +259,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnBow(InputAction.CallbackContext context);
     }
 }

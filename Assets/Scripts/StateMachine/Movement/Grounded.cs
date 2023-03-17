@@ -19,9 +19,7 @@ public class Grounded : MovementState
     {
         base.OnUpdate();
 
-        _psm.psl.horizontalInput = playerControls.PlayerControlsMap.Move.ReadValue<Vector2>().x;
-
-        if (IsGrounded())
+        if (_psm.psl.IsGrounded(_psm.RigBody, _psm.GroundLayer))
         {
             _psm.RigBody.gravityScale = _psm.GravityStored;
         }
@@ -30,23 +28,5 @@ public class Grounded : MovementState
         _psm.psl.jumpCooldown = _psm.psl.jumpCooldown > 0 ? 
             _psm.psl.jumpCooldown - Time.deltaTime
             : 0f;
-    }
-
-    /// <summary>
-    /// Checks if the character's collider is touching the ground layer
-    /// </summary>
-    /// <returns>True if touching a ground layer, false otherwise</returns>
-    public static bool IsGrounded()
-    {
-        return _psm.RigBody.IsTouchingLayers(_psm.GroundLayer);
-    }
-
-    public static void ApplyGroundDrag(float mult = 1f)
-    {
-        // To eliminate sliding when approaching rest
-        _psm.RigBody.AddForce(new Vector2
-            (-(_psm.RigBody.velocity.x * (_psm.DragFactor * mult)), 0),
-            ForceMode2D.Force
-        );
     }
 }

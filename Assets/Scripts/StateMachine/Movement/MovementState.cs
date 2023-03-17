@@ -16,7 +16,7 @@ public class MovementState : ContainerState
     {
         base.OnUpdate();
 
-        if (Grounded.IsGrounded())
+        if (_psm.psl.IsGrounded(_psm.RigBody, _psm.GroundLayer))
             _psm.psl.jumped = false;
     }
 

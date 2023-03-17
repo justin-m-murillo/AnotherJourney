@@ -27,6 +27,11 @@ public class PlayerSM : StateMachine
     [HideInInspector]
     public AttackState[] attackStates;
 
+    [HideInInspector]
+    public BowDraw bowDraw;
+    [HideInInspector]
+    public BowRelease bowRelease;
+
     [Tooltip("Player Static Library contains all static variables required for this state machine")]
     public PlayerStatics psl;
     [Tooltip("Character transform")]
@@ -35,8 +40,6 @@ public class PlayerSM : StateMachine
     [SerializeField] LayerMask _groundLayer;
     [Tooltip("Character rigidbody")]
     [SerializeField] Rigidbody2D _rb;
-    [Tooltip("Character AnimController script (for animation control)")]
-    [SerializeField] AnimController _anim;
 
     [Tooltip("Character's default movement speed")]
     [SerializeField] float _defaultMovementSpeed;
@@ -124,6 +127,9 @@ public class PlayerSM : StateMachine
         attackFour  = new(this, 3);
         attackFive  = new(this, 4);
 
+        bowDraw = new(this);
+        bowRelease = new(this);
+
         attackStates = new AttackState[]
         {
             attackOne, 
@@ -136,7 +142,8 @@ public class PlayerSM : StateMachine
         CharacterTransform = _characterTransform;
         GroundLayer = _groundLayer;
         RigBody = _rb;
-        Anim = _anim;
+        Anim = ScriptableObject.CreateInstance<AnimController>();
+        Anim.SetAnimator(GetComponentInChildren<Animator>());
 
         //HorizontalInput = 0f;
         MovementSpeed = _defaultMovementSpeed;
@@ -158,17 +165,5 @@ public class PlayerSM : StateMachine
     protected override BaseState GetInitialState()
     {
         return idleState;
-    }
-
-    /// <summary>
-    /// Sets the horizontal input used to control the character's horizontal movement
-    /// </summary>
-    /// <param name="horizontalInput"></param>
-    /*public void SetHorizontalInput(float horizontalInput)
-    {
-        //if (!IsGrounded()) return;
-        HorizontalInput = horizontalInput;
-    }*/
-
-    
+    }  
 }

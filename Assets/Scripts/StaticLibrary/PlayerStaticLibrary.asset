@@ -23,3 +23,9 @@ MonoBehaviour:
   comboDelay: 0.3
   canAttack: 1
   comboIndex: 0
+  canBow: 1
+  bowDrawn: 0
+  bowWalkSpeed: 1
+  bowReleaseAnimTimer: 0.2
+  defaultBowFireDelay: 0.5
+  bowFireDelay: 0.5

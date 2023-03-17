@@ -30,6 +30,6 @@ public class Idle : Grounded
     public override void OnFixedUpdate()
     {
         base.OnFixedUpdate();
-        ApplyGroundDrag();
+        _psm.psl.ApplyGroundDrag(_psm.RigBody, _psm.DragFactor);
     }
 }
