@@ -22,7 +22,7 @@ public class Falling : MovementState
 
         if (_psm.psl.IsGrounded(_psm.RigBody, _psm.GroundLayer))
         {
-            stateMachine.ChangeState(_psm.idleState);
+            stateMachine.ChangeState(_psm.movingState);
         }
     }
 }

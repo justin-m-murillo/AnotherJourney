@@ -23,33 +23,31 @@ public class AttackState : CombatState
     public override void OnUpdate()
     {
         base.OnUpdate();
-        TimeComboDelay();
-        TimeComboDuration();
+        _psm.psl.canAttack = TimeComboDelay();
+        bool change = TimeComboDuration();
+        if (change)
+        {
+            
+            stateMachine.ChangeState(_psm.idleState);
+        }
     }
 
-    private void TimeComboDelay()
+    private bool TimeComboDelay()
     {
         _psm.psl.comboDelay = _psm.psl.comboDelay > 0 ?
             _psm.psl.comboDelay - Time.deltaTime
             : 0;
 
-        if (_psm.psl.comboDelay == 0)
-        {
-            _psm.psl.canAttack = true;
-        }
+        return _psm.psl.comboDelay == 0;
     }
 
-    private void TimeComboDuration()
+    private bool TimeComboDuration()
     {
         _psm.psl.comboDuration = _psm.psl.comboDuration > 0 ?
             _psm.psl.comboDuration - Time.deltaTime
             : 0;
 
-        if (_psm.psl.comboDuration == 0)
-        {
-            _psm.psl.comboIndex = 0;
-            stateMachine.ChangeState(_psm.idleState);
-        }
+        return _psm.psl.comboDuration == 0;
     }
 
     private void AttackPush()

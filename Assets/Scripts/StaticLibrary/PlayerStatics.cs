@@ -14,6 +14,10 @@ public class PlayerStatics : ScriptableObject
     public bool jumped;
     public float defaultJumpCooldown;
     public float jumpCooldown; // to prevent double jump glitches
+
+    public float previousYPosition; // saves the y position before next frame
+    public float diffYPosition; // the difference in y position between current frame and previous frame
+
     public float horizontalInput;
     public bool isFacingRight;
 

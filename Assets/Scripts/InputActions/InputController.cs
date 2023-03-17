@@ -42,10 +42,13 @@ public class InputController : MonoBehaviour
 
     public void JumpStarted(InputAction.CallbackContext context)
     {
+        // BREAK CONDITIONS
         if (_psm.psl.jumped) return;
         if (_psm.psl.jumpCooldown > 0f) return;
+        if (_psm.psl.bowDrawn) return;
         if (!_psm.psl.IsGrounded(_psm.RigBody, _psm.GroundLayer)) return;
-
+        /////////////////////////////////////////////////////////////////
+        
         _psm.psl.jumped = true;
         _psm.JumpPerformed = false;
         _psm.currentState
@@ -60,7 +63,10 @@ public class InputController : MonoBehaviour
 
     public void JumpCanceled(InputAction.CallbackContext context)
     {
+        // BREAK CONDITIONS
         if (_psm.JumpPerformed) return;
+        /////////////////////////////////////////////////////////////////
+
         _psm.currentState
             .GetStateMachine()
             .ChangeState(_psm.fallingState);
@@ -68,7 +74,10 @@ public class InputController : MonoBehaviour
 
     public void AttackStarted(InputAction.CallbackContext context)
     {
+        // BREAK CONDITIONS
         if (!_psm.psl.canAttack) return;
+        /////////////////////////////////////////////////////////////////
+
         if (_psm.psl.comboIndex > _psm.attackStates.Length - 1)
         {
             _psm.currentState
@@ -85,8 +94,10 @@ public class InputController : MonoBehaviour
 
     public void BowStarted(InputAction.CallbackContext context)
     {
+        // BREAK CONDITIONS
         if (!_psm.psl.canBow) return;
-        
+        /////////////////////////////////////////////////////////////////
+
         _psm.psl.canBow = false;
         _psm.psl.bowDrawn = true;
         _psm.currentState

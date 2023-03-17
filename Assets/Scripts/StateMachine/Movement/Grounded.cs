@@ -12,6 +12,7 @@ public class Grounded : MovementState
     {
         base.OnEnter();
         _psm.RigBody.gravityScale = _psm.GravityStored;
+
     }
 
     public override void OnUpdate()

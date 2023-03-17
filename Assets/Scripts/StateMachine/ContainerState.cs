@@ -1,7 +1,3 @@
-using System.Diagnostics;
-using UnityEngine;
-using UnityEngine.InputSystem;
-
 public class ContainerState : BaseState
 {
     protected PlayerSM _psm;
@@ -9,5 +5,10 @@ public class ContainerState : BaseState
     public ContainerState(string name, PlayerSM stateMachine) : base(name, stateMachine)
     {
         _psm = stateMachine;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
     }
 }
