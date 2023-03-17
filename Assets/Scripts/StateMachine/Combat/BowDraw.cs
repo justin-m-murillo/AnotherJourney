@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class BowDraw : CombatState
 {
-    public BowDraw(PlayerSM stateMachine) : base("BowDraw", stateMachine)
-    {
-        _psm = stateMachine;
-    }
+    public BowDraw(PlayerSM stateMachine) : base("BowDraw", stateMachine) { }
 
     public override void OnEnter()
     {

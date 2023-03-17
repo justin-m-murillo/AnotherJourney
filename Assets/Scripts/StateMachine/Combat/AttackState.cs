@@ -2,10 +2,7 @@ using UnityEngine;
 
 public class AttackState : CombatState
 {
-    public AttackState(PlayerSM stateMachine, int index) : base("Attack" + (index + 1), stateMachine)
-    {
-        _psm = (PlayerSM)stateMachine;
-    }
+    public AttackState(PlayerSM stateMachine, int index) : base("Attack" + (index + 1), stateMachine) { }
 
     public override void OnEnter()
     {

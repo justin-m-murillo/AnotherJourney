@@ -2,10 +2,7 @@ using UnityEngine;
 
 public class Moving : Grounded
 {
-    public Moving(PlayerSM stateMachine) : base("Moving", stateMachine) 
-    {
-        _psm = (PlayerSM)stateMachine;
-    }
+    public Moving(PlayerSM stateMachine) : base("Moving", stateMachine) { }
 
     public override void OnEnter()
     {

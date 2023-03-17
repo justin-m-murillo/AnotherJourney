@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class InputController : MonoBehaviour
 {
-    [SerializeField] PlayerSM psm;
+    [SerializeField] PlayerSM _psm;
 
     private static PlayerControls playerControls;
 
@@ -37,65 +37,65 @@ public class InputController : MonoBehaviour
 
     private void Update()
     {
-        psm.psl.horizontalInput = playerControls.PlayerControlsMap.Move.ReadValue<Vector2>().x;
+        _psm.psl.horizontalInput = playerControls.PlayerControlsMap.Move.ReadValue<Vector2>().x;
     }
 
     public void JumpStarted(InputAction.CallbackContext context)
     {
-        if (psm.psl.jumped) return;
-        if (psm.psl.jumpCooldown > 0f) return;
-        if (!psm.psl.IsGrounded(psm.RigBody, psm.GroundLayer)) return;
+        if (_psm.psl.jumped) return;
+        if (_psm.psl.jumpCooldown > 0f) return;
+        if (!_psm.psl.IsGrounded(_psm.RigBody, _psm.GroundLayer)) return;
 
-        psm.psl.jumped = true;
-        psm.currentState
+        _psm.psl.jumped = true;
+        _psm.JumpPerformed = false;
+        _psm.currentState
             .GetStateMachine()
-            .ChangeState(psm.jumpState);
+            .ChangeState(_psm.jumpState);
     }
 
     public void JumpPerformed(InputAction.CallbackContext context)
     {
-        if (context.started)
-            psm.JumpPerformed = true;
+        _psm.JumpPerformed = true;
     }
 
     public void JumpCanceled(InputAction.CallbackContext context)
     {
-        if (!context.performed)
-            Falling.InvokeGravityScalar();
+        if (_psm.JumpPerformed) return;
+        _psm.currentState
+            .GetStateMachine()
+            .ChangeState(_psm.fallingState);
     }
 
     public void AttackStarted(InputAction.CallbackContext context)
     {
-        if (!psm.psl.canAttack) return;
-        if (psm.psl.comboIndex > psm.attackStates.Length - 1)
+        if (!_psm.psl.canAttack) return;
+        if (_psm.psl.comboIndex > _psm.attackStates.Length - 1)
         {
-            psm.currentState
+            _psm.currentState
                 .GetStateMachine()
-                .ChangeState(psm.idleState);
+                .ChangeState(_psm.idleState);
             return;
         }
 
-        psm.psl.canAttack = false;
-        psm.currentState
+        _psm.psl.canAttack = false;
+        _psm.currentState
             .GetStateMachine()
-            .ChangeState(psm.attackStates[psm.psl.comboIndex]);
+            .ChangeState(_psm.attackStates[_psm.psl.comboIndex]);
     }
 
     public void BowStarted(InputAction.CallbackContext context)
     {
-        if (!psm.psl.canBow) return;
+        if (!_psm.psl.canBow) return;
         
-        psm.psl.canBow = false;
-        psm.psl.bowDrawn = true;
-        psm.currentState
+        _psm.psl.canBow = false;
+        _psm.psl.bowDrawn = true;
+        _psm.currentState
             .GetStateMachine()
-            .ChangeState(psm.bowDraw);
-        Debug.Log("Bow drawn");
+            .ChangeState(_psm.bowDraw);
     }
 
     public void BowCanceled(InputAction.CallbackContext context)
     {
-        psm.psl.bowDrawn = false;
-        Debug.Log("bow released");
+        _psm.psl.bowDrawn = false;
     }
 }

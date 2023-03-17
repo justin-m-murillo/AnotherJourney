@@ -1,18 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class Falling : MovementState
 {
-    public Falling(PlayerSM stateMachine) : base("Falling", stateMachine) 
-    { 
-        _psm = (PlayerSM)stateMachine;
-    }
+    public Falling(PlayerSM stateMachine) : base("Falling", stateMachine) { }
 
     public override void OnEnter()
     {
         base.OnEnter();
-
+        _psm.psl.InvokeGravityScalar(_psm.RigBody, _psm.GravityFall);
         _psm.Anim.TriggerFalling();
     }
 
@@ -29,15 +22,7 @@ public class Falling : MovementState
 
         if (_psm.psl.IsGrounded(_psm.RigBody, _psm.GroundLayer))
         {
-            stateMachine.ChangeState(_psm.movingState);
+            stateMachine.ChangeState(_psm.idleState);
         }
-    }
-
-    /// <summary>
-    /// Adjusts the Rigidbody2D's gravityScale to GravityFall's value
-    /// </summary>
-    public static void InvokeGravityScalar()
-    {
-        _psm.RigBody.gravityScale = _psm.GravityFall;
     }
 }

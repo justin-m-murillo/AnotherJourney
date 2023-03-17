@@ -7,9 +7,7 @@ public class MovementState : ContainerState
 {
     public MovementState(string name, PlayerSM stateMachine) : base(name, stateMachine)
     {
-        _psm = (PlayerSM)stateMachine;
         _psm.psl.jumped = false;
-
     }
 
     public override void OnUpdate()

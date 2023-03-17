@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class ContainerState : BaseState
 {
-    protected static PlayerSM _psm;
+    protected PlayerSM _psm;
 
     public ContainerState(string name, PlayerSM stateMachine) : base(name, stateMachine)
     {

@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class Idle : Grounded
 {
-    public Idle(PlayerSM stateMachine) : base("Idle", stateMachine) 
-    {
-        _psm = (PlayerSM)stateMachine;
-    }
+    public Idle(PlayerSM stateMachine) : base("Idle", stateMachine) { }
 
     public override void OnEnter()
     {

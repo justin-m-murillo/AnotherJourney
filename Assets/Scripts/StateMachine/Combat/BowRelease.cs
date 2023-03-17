@@ -6,10 +6,7 @@ public class BowRelease : CombatState
 {
     private float animationTimer;
 
-    public BowRelease(PlayerSM stateMachine) : base("BowRelease", stateMachine) 
-    { 
-        _psm = stateMachine;
-    }
+    public BowRelease(PlayerSM stateMachine) : base("BowRelease", stateMachine) { }
 
     public override void OnEnter()
     {

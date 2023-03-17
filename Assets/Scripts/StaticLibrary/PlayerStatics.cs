@@ -61,6 +61,12 @@ public class PlayerStatics : ScriptableObject
         return rb.IsTouchingLayers(ground);
     }
 
+    /// <summary>
+    /// Apply additional ground drag
+    /// </summary>
+    /// <param name="rb">object's rigidbody</param>
+    /// <param name="dragFactor">how much of the rigidbody's velocity is used to apply drag in the opposite of moving direction</param>
+    /// <param name="mult">optional drag factor multiplier for special cases (defaults to 1f if parameter is not supplied)</param>
     public void ApplyGroundDrag(Rigidbody2D rb, float dragFactor, float mult = 1f)
     {
         // To eliminate sliding when approaching rest
@@ -68,5 +74,13 @@ public class PlayerStatics : ScriptableObject
             (-(rb.velocity.x * (dragFactor * mult)), 0),
             ForceMode2D.Force
         );
+    }
+
+    /// <summary>
+    /// Temporarily sets the Rigidbody2D's gravityScale to GravityFall's value multiplied by third parameter if provided
+    /// </summary>
+    public void InvokeGravityScalar(Rigidbody2D rb, float newGravityScale, float mult = 1f)
+    {
+        rb.gravityScale = newGravityScale * mult;
     }
 }
