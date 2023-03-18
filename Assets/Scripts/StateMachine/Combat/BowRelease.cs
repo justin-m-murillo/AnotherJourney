@@ -27,10 +27,9 @@ public class BowRelease : CombatState
             animationTimer - Time.deltaTime : 
             0;
 
-        if (animationTimer == 0)
-        {
-            stateMachine.ChangeState(_psm.idleState);
-        }
+        if (animationTimer != 0) return;
+        stateMachine.ChangeState(_psm.idleState);
+        
     }
 
 

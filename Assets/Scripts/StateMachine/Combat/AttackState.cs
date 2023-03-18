@@ -12,16 +12,14 @@ public class AttackState : CombatState
     {
         base.OnEnter();
 
-        if (_psm.psl.IsGrounded(_psm.RigBody, _psm.GroundLayer))
-        {
-            _psm.psl.ApplyGroundDrag(_psm.RigBody, _psm.DragFactor, 3f);
-            AttackPush();
-        }
-
         _psm.psl.comboDelay = _psm.psl.defaultComboDelay; // delay between attacks to avoid animation canceling
         _psm.psl.comboDuration = _psm.psl.defaultComboDuration; // duration to execute another attack before exiting 
         _psm.Anim.ChangeAnimationState(_animName); 
-        _psm.psl.comboIndex++; 
+        _psm.psl.comboIndex++;
+
+        if (!_psm.psl.IsGrounded(_psm.RigBody, _psm.GroundLayer)) return;
+        _psm.psl.ApplyGroundDrag(_psm.RigBody, _psm.DragFactor, 3f);
+        AttackPush();
     }
 
     public override void OnUpdate()
@@ -29,8 +27,8 @@ public class AttackState : CombatState
         base.OnUpdate();
         _psm.psl.canAttack = TimeComboDelay();
         bool change = TimeComboDuration();
+        
         if (!change) return;
-
         stateMachine.ChangeState(_psm.movingState);
     }
 

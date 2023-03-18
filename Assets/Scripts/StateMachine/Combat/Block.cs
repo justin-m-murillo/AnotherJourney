@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Idle : Grounded
+public class Block : CombatState
 {
     public override void Init(string stateName, string animName, PlayerSM stateMachine)
     {
@@ -18,13 +18,15 @@ public class Idle : Grounded
     {
         base.OnUpdate();
 
-        if (Mathf.Abs(_psm.psl.horizontalInput) < Mathf.Epsilon) return;
-        stateMachine.ChangeState(_psm.movingState);
+        if (_psm.psl.isBlocking) return;
+        stateMachine.ChangeState(_psm.idleState);
     }
 
     public override void OnFixedUpdate()
     {
         base.OnFixedUpdate();
-        _psm.psl.ApplyGroundDrag(_psm.RigBody, _psm.DragFactor);
+
+        if (!_psm.psl.IsGrounded(_psm.RigBody, _psm.GroundLayer)) return;
+        _psm.psl.SetModifiedMovementSpeed(_psm.RigBody, _psm.psl.blockWalkSpeed);
     }
 }

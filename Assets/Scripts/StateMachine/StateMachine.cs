@@ -10,23 +10,27 @@ public class StateMachine : MonoBehaviour
     void Start()
     {
         currentState = GetInitialState();
-        currentState?.OnEnter();
+        if (currentState == null) return;
+        currentState.OnEnter();
     }
 
     // Update is called once per frame
     void Update()
     {
-        currentState?.OnUpdate();
+        if (currentState == null) return;
+        currentState.OnUpdate();
     }
 
     void LateUpdate()
     {
-        currentState?.OnLateUpdate();
+        if (currentState == null) return;
+        currentState.OnLateUpdate();
     }
 
     void FixedUpdate()
     {
-        currentState?.OnFixedUpdate();    
+        if (currentState == null) return;
+        currentState.OnFixedUpdate();    
     }
 
     public void ChangeState(BaseState newState)

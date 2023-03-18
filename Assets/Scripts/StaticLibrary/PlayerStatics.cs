@@ -15,13 +15,13 @@ public class PlayerStatics : ScriptableObject
     public float defaultJumpCooldown;
     public float jumpCooldown; // to prevent double jump glitches
 
-    public bool grounded;
+    public bool grounded; // if the player is touching a ground tile
 
     public float previousYPosition; // saves the y position before next frame
     public float diffYPosition; // the difference in y position between current frame and previous frame
 
-    public float horizontalInput;
-    public bool isFacingRight;
+    public float horizontalInput; // user horizontal input value from input controller
+    public bool isFacingRight; // if the sprite is facing right
 
     /////////////////////////////////////////////////////////////////////
 
@@ -40,9 +40,11 @@ public class PlayerStatics : ScriptableObject
     public bool bowDrawn; // if the player currently has their bow drawn
     public float bowWalkSpeed; // player movement speed while bow is drawn
     public float bowReleaseAnimTimer; // the time given for the bow release animation to complete
-    public float defaultBowFireDelay; // default duration to charge successful shot 
-    public float bowFireDelay; // duration to charge successful shot
+    public float defaultBowChargeTimer; // default duration to charge successful shot 
+    public float bowChargeTimer; // duration to charge successful shot
 
+    public bool isBlocking; // if the player is currently blocking with shield
+    public float blockWalkSpeed; // player movement speed while blocking
 
     /// <summary>
     /// Resets attack-related parameters once the player exits combat state
@@ -54,9 +56,11 @@ public class PlayerStatics : ScriptableObject
         canAttack = true;
         comboIndex = 0;
 
-        bowFireDelay = 0;
+        bowChargeTimer = 0;
         bowDrawn = false;
         canBow = true;
+
+        isBlocking = false;
     }
 
     /// <summary>
@@ -90,5 +94,15 @@ public class PlayerStatics : ScriptableObject
     public void InvokeGravityScalar(Rigidbody2D rb, float newGravityScale, float mult = 1f)
     {
         rb.gravityScale = newGravityScale * mult;
+    }
+
+    /// <summary>
+    /// Temporarily sets the Rigidbody2D's velocity to a different speed than normal movement 
+    /// </summary>
+    public void SetModifiedMovementSpeed(Rigidbody2D rb, float newSpeed)
+    {
+        Vector2 vel = rb.velocity;
+        vel.x = newSpeed * horizontalInput;
+        rb.velocity = vel;
     }
 }

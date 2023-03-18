@@ -32,6 +32,9 @@ public class PlayerSM : StateMachine
     [HideInInspector]
     public BowRelease bowRelease;
 
+    [HideInInspector]
+    public Block blockState;
+
     [Tooltip("Player Static Library contains all static variables required for this state machine")]
     public PlayerStatics psl;
     [Tooltip("Character transform")]
@@ -130,6 +133,8 @@ public class PlayerSM : StateMachine
         bowDraw     = ScriptableObject.CreateInstance<BowDraw>();
         bowRelease  = ScriptableObject.CreateInstance<BowRelease>();
 
+        blockState  = ScriptableObject.CreateInstance<Block>(); 
+
         idleState
             .Init("Idle", "P_Idle", this);
         movingState
@@ -154,6 +159,8 @@ public class PlayerSM : StateMachine
             .Init("BowDraw", "P_BowDraw", this);
         bowRelease
             .Init("BowRelease", "P_BowRelease", this);
+        blockState
+            .Init("Block", "P_Block", this);
 
         attackStates = new AttackState[]
         {

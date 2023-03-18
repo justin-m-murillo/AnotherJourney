@@ -13,7 +13,8 @@ public class BowDraw : CombatState
     public override void OnEnter()
     {
         base.OnEnter();
-        _psm.psl.bowFireDelay = _psm.psl.defaultBowFireDelay;
+        
+        _psm.psl.bowChargeTimer = _psm.psl.defaultBowChargeTimer;
 
         if (_psm.psl.IsGrounded(_psm.RigBody, _psm.GroundLayer))
         {
@@ -23,6 +24,13 @@ public class BowDraw : CombatState
         }
         
         _psm.Anim.ChangeAnimationState(_animName);
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+
+        _psm.psl.bowChargeTimer = 0f;
     }
 
     public override void OnUpdate()
@@ -39,23 +47,16 @@ public class BowDraw : CombatState
     public override void OnFixedUpdate()
     {
         base.OnFixedUpdate();
-
         if (!_psm.psl.IsGrounded(_psm.RigBody, _psm.GroundLayer)) return;
-
-        if (Mathf.Abs(_psm.psl.horizontalInput) > Mathf.Epsilon)
-        {
-            Vector2 vel = _psm.RigBody.velocity;
-            vel.x = _psm.psl.bowWalkSpeed * _psm.psl.horizontalInput;
-            _psm.RigBody.velocity = vel;
-        }
+        _psm.psl.SetModifiedMovementSpeed(_psm.RigBody, _psm.psl.bowWalkSpeed);
     }
 
     private bool TimeBowFireDelay()
     {
-        _psm.psl.bowFireDelay = _psm.psl.bowFireDelay > 0 ?
-            _psm.psl.bowFireDelay - Time.deltaTime : 
+        _psm.psl.bowChargeTimer = _psm.psl.bowChargeTimer > 0 ?
+            _psm.psl.bowChargeTimer - Time.deltaTime : 
             0;
 
-        return _psm.psl.bowFireDelay == 0;
+        return _psm.psl.bowChargeTimer == 0;
     }
 }

@@ -33,6 +33,8 @@ public class InputController : MonoBehaviour
         playerControls.PlayerControlsMap.Attack.started += AttackStarted;
         playerControls.PlayerControlsMap.Bow.started += BowStarted;
         playerControls.PlayerControlsMap.Bow.canceled += BowCanceled;
+        playerControls.PlayerControlsMap.Block.started += BlockStarted;
+        playerControls.PlayerControlsMap.Block.canceled += BlockCanceled;
     }
 
     private void Update()
@@ -103,5 +105,22 @@ public class InputController : MonoBehaviour
     public void BowCanceled(InputAction.CallbackContext context)
     {
         _psm.psl.bowDrawn = false;
+    }
+    
+    public void BlockStarted(InputAction.CallbackContext context)
+    {
+        // BREAK CONDITIONS
+        if (_psm.psl.isBlocking) return;
+        //////////////////////////////////////////////////////////////////
+
+        _psm.psl.isBlocking = true;
+        _psm.currentState
+            .GetStateMachine()
+            .ChangeState(_psm.blockState);
+    }
+
+    public void BlockCanceled(InputAction.CallbackContext context)
+    {
+        _psm.psl.isBlocking = false;
     }
 }
