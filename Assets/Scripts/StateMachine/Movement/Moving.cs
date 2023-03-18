@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class Moving : Grounded
 {
-    public Moving(PlayerSM stateMachine) : base("Moving", stateMachine) { }
+    public Moving(PlayerSM stateMachine) : base("Moving", "P_Moving", stateMachine) { }
 
     public override void OnEnter()
     {
         base.OnEnter();
 
         //_psm.HorizontalInput = 0f;
-        _psm.Anim.TriggerMove();
+        _psm.Anim.ChangeAnimationState(_animName);
     }
 
     public override void OnUpdate()

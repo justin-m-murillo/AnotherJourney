@@ -15,12 +15,15 @@ MonoBehaviour:
   jumped: 0
   defaultJumpCooldown: 0.02
   jumpCooldown: 0
+  grounded: 1
+  previousYPosition: -3.485016
+  diffYPosition: 0
   horizontalInput: 0
   isFacingRight: 0
-  defaultComboDuration: 0.5
-  comboDuration: 0.5
-  defaultComboDelay: 0.3
-  comboDelay: 0.3
+  defaultComboDuration: 0.4
+  comboDuration: 0
+  defaultComboDelay: 0.2
+  comboDelay: 0
   canAttack: 1
   comboIndex: 0
   canBow: 1
@@ -28,4 +31,4 @@ MonoBehaviour:
   bowWalkSpeed: 1
   bowReleaseAnimTimer: 0.2
   defaultBowFireDelay: 0.5
-  bowFireDelay: 0.5
+  bowFireDelay: 0

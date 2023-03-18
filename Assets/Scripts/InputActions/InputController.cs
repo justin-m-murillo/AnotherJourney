@@ -67,9 +67,7 @@ public class InputController : MonoBehaviour
         if (_psm.JumpPerformed) return;
         /////////////////////////////////////////////////////////////////
 
-        _psm.currentState
-            .GetStateMachine()
-            .ChangeState(_psm.fallingState);
+        _psm.psl.InvokeGravityScalar(_psm.RigBody, _psm.GravityFall);
     }
 
     public void AttackStarted(InputAction.CallbackContext context)
@@ -80,10 +78,7 @@ public class InputController : MonoBehaviour
 
         if (_psm.psl.comboIndex > _psm.attackStates.Length - 1)
         {
-            _psm.currentState
-                .GetStateMachine()
-                .ChangeState(_psm.idleState);
-            return;
+            _psm.psl.comboIndex = 0;
         }
 
         _psm.psl.canAttack = false;

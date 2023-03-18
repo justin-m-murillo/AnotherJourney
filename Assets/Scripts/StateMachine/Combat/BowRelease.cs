@@ -6,13 +6,13 @@ public class BowRelease : CombatState
 {
     private float animationTimer;
 
-    public BowRelease(PlayerSM stateMachine) : base("BowRelease", stateMachine) { }
+    public BowRelease(PlayerSM stateMachine) : base("BowRelease", "P_BowRelease", stateMachine) { }
 
     public override void OnEnter()
     {
         base.OnEnter();
         animationTimer = _psm.psl.bowReleaseAnimTimer;
-        _psm.Anim.TriggerBowRelease();
+        _psm.Anim.ChangeAnimationState(_animName);
     }
 
     public override void OnUpdate()

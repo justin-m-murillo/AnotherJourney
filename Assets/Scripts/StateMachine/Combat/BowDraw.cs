@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BowDraw : CombatState
 {
-    public BowDraw(PlayerSM stateMachine) : base("BowDraw", stateMachine) { }
+    public BowDraw(PlayerSM stateMachine) : base("BowDraw", "P_BowDraw", stateMachine) { }
 
     public override void OnEnter()
     {
@@ -18,13 +18,13 @@ public class BowDraw : CombatState
             _psm.RigBody.velocity = vel;
         }
         
-        _psm.Anim.TriggerBowDraw();
+        _psm.Anim.ChangeAnimationState(_animName);
     }
 
     public override void OnUpdate()
     { 
         base.OnUpdate();
-        TimeBowFireDelay();
+        _psm.psl.canBow = TimeBowFireDelay();
 
         if (_psm.psl.bowDrawn == false)
         {
@@ -46,15 +46,12 @@ public class BowDraw : CombatState
         }
     }
 
-    private void TimeBowFireDelay()
+    private bool TimeBowFireDelay()
     {
         _psm.psl.bowFireDelay = _psm.psl.bowFireDelay > 0 ?
             _psm.psl.bowFireDelay - Time.deltaTime : 
             0;
 
-        if (Mathf.Abs(_psm.psl.bowFireDelay) < Mathf.Epsilon)
-        {
-            _psm.psl.canBow = true;
-        }
+        return _psm.psl.bowFireDelay == 0;
     }
 }

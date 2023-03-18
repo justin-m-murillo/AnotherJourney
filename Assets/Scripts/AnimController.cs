@@ -3,23 +3,17 @@ using UnityEngine;
 public class AnimController : ScriptableObject
 {
     private Animator _anim;
-    
+    private string currentState;
+
     public void SetAnimator(Animator anim) { _anim = anim; }
 
-    public void TriggerIdle() { _anim.SetTrigger("Idle"); }
-
-    public void TriggerMove() { _anim.SetTrigger("Moving"); }
-
-    public void TriggerJump() { _anim.SetTrigger("Jump"); }
-
-    public void TriggerFalling() { _anim.SetTrigger("Falling"); }
-
-    public void TriggerAttack(string attackName)
+    public void ChangeAnimationState(string nextState)
     {
-        _anim.SetTrigger(attackName);
+        // stop animation from interrupting self
+        if (currentState == nextState) return;
+        // player next animation
+        _anim.Play(nextState);
+        // set current animation state to next animation
+        currentState = nextState;
     }
-
-    public void TriggerBowDraw() { _anim.SetTrigger("BowDraw"); }
-
-    public void TriggerBowRelease() { _anim.SetTrigger("BowRelease"); }
 }

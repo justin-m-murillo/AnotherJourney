@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Jump : MovementState
 {
-    public Jump(PlayerSM stateMachine) : base("Jump", stateMachine) { }
+    public Jump(PlayerSM stateMachine) : base("Jump", "P_Jump", stateMachine) { }
 
     public override void OnEnter()
     {
@@ -15,6 +15,12 @@ public class Jump : MovementState
         vel.y += _psm.JumpForce;
         _psm.RigBody.velocity = vel;
 
-        _psm.Anim.TriggerJump();
+        _psm.Anim.ChangeAnimationState(_animName);
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+
     }
 }

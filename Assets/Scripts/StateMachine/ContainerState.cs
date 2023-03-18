@@ -1,14 +1,11 @@
 public class ContainerState : BaseState
 {
     protected PlayerSM _psm;
+    protected string _animName;
 
-    public ContainerState(string name, PlayerSM stateMachine) : base(name, stateMachine)
+    public ContainerState(string name, string animName, PlayerSM stateMachine) : base(name, stateMachine)
     {
         _psm = stateMachine;
-    }
-
-    public override void OnEnter()
-    {
-        base.OnEnter();
+        _animName = animName;
     }
 }

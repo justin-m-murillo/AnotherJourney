@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class Idle : Grounded
 {
-    public Idle(PlayerSM stateMachine) : base("Idle", stateMachine) { }
+    public Idle(PlayerSM stateMachine) : base("Idle", "P_Idle", stateMachine) { }
 
     public override void OnEnter()
     {
         base.OnEnter();
 
-        _psm.psl.ResetAttackParams();
-        _psm.Anim.TriggerIdle();
+        _psm.Anim.ChangeAnimationState(_animName);
     }
 
     public override void OnUpdate()

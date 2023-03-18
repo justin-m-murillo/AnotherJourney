@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AttackState : CombatState
 {
-    public AttackState(PlayerSM stateMachine, int index) : base("Attack" + (index + 1), stateMachine) { }
+    public AttackState(PlayerSM stateMachine, int index) : base("Attack" + (index + 1), "P_Attack" + (index + 1), stateMachine) { }
 
     public override void OnEnter()
     {
@@ -16,7 +16,7 @@ public class AttackState : CombatState
 
         _psm.psl.comboDelay = _psm.psl.defaultComboDelay; // delay between attacks to avoid animation canceling
         _psm.psl.comboDuration = _psm.psl.defaultComboDuration; // duration to execute another attack before exiting 
-        _psm.Anim.TriggerAttack(name); 
+        _psm.Anim.ChangeAnimationState(_animName); 
         _psm.psl.comboIndex++; 
     }
 
@@ -25,11 +25,9 @@ public class AttackState : CombatState
         base.OnUpdate();
         _psm.psl.canAttack = TimeComboDelay();
         bool change = TimeComboDuration();
-        if (change)
-        {
-            
-            stateMachine.ChangeState(_psm.idleState);
-        }
+        if (!change) return;
+
+        stateMachine.ChangeState(_psm.movingState);
     }
 
     private bool TimeComboDelay()

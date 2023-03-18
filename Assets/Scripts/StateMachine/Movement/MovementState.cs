@@ -1,11 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.InputSystem;
-
 public class MovementState : ContainerState
 {
-    public MovementState(string name, PlayerSM stateMachine) : base(name, stateMachine)
+    public MovementState(string name, string animName, PlayerSM stateMachine) : base(name, animName, stateMachine)
     {
         _psm.psl.jumped = false;
     }
@@ -14,6 +9,7 @@ public class MovementState : ContainerState
     {
         base.OnEnter();
 
+        _psm.psl.ResetAttackParams();
         _psm.psl.previousYPosition = _psm.RigBody.position.y;
     }
 
@@ -23,14 +19,19 @@ public class MovementState : ContainerState
 
         if (_psm.psl.IsGrounded(_psm.RigBody, _psm.GroundLayer))
             _psm.psl.jumped = false;
+    }
+
+    public override void OnLateUpdate()
+    {
+        base.OnLateUpdate();
 
         _psm.psl.diffYPosition = _psm.RigBody.position.y - _psm.psl.previousYPosition;
-        if (_psm.psl.diffYPosition < 0)
+        if (_psm.psl.diffYPosition < 0 && _psm.psl.comboDuration == 0)
         {
             stateMachine.ChangeState(_psm.fallingState);
         }
         _psm.psl.previousYPosition = _psm.RigBody.position.y;
     }
 
-    
+
 }

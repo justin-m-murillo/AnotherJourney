@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CombatState : ContainerState
 {
-    public CombatState(string name, PlayerSM stateMachine) : base(name, stateMachine) { }
+    public CombatState(string name, string animName, PlayerSM stateMachine) : base(name, animName, stateMachine) { }
 
     public override void OnEnter()
     {

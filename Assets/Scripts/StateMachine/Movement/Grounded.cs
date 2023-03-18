@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Grounded : MovementState
 {
-    public Grounded(string name, PlayerSM stateMachine) : base(name, stateMachine)
+    public Grounded(string name, string animName, PlayerSM stateMachine) : base(name, animName, stateMachine)
     {
         _psm.psl.horizontalInput = 0f;
         _psm.psl.isFacingRight = true;

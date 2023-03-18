@@ -15,6 +15,8 @@ public class PlayerStatics : ScriptableObject
     public float defaultJumpCooldown;
     public float jumpCooldown; // to prevent double jump glitches
 
+    public bool grounded;
+
     public float previousYPosition; // saves the y position before next frame
     public float diffYPosition; // the difference in y position between current frame and previous frame
 
@@ -47,12 +49,13 @@ public class PlayerStatics : ScriptableObject
     /// </summary>
     public void ResetAttackParams()
     {
-        comboDuration = defaultComboDuration;
-        comboDelay = defaultComboDelay;
+        comboDuration = 0;
+        comboDelay = 0;
         canAttack = true;
         comboIndex = 0;
 
-        bowFireDelay = defaultBowFireDelay;
+        bowFireDelay = 0;
+        bowDrawn = false;
         canBow = true;
     }
 
@@ -62,6 +65,7 @@ public class PlayerStatics : ScriptableObject
     /// <returns>True if touching a ground layer, false otherwise</returns>
     public bool IsGrounded(Rigidbody2D rb, LayerMask ground)
     {
+        grounded = rb.IsTouchingLayers(ground);
         return rb.IsTouchingLayers(ground);
     }
 
