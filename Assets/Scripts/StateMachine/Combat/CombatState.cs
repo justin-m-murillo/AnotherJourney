@@ -10,7 +10,7 @@ public class CombatState : ContainerState
     public override void OnEnter()
     {
         base.OnEnter();
-        _psm.psl.jumpCooldown = _psm.psl.defaultJumpCooldown; // jump cooldown prevents awkward animation canceling
+        _psm.pdl.JUMP_COOLDOWN = _psm.pdl.DEFAULT_JUMP_COOLDOWN; // jump cooldown prevents awkward animation canceling
         
     }
 

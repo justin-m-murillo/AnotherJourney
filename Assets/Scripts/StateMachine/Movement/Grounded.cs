@@ -5,8 +5,8 @@ public class Grounded : MovementState
     public override void Init(string stateName, string animName, PlayerSM stateMachine)
     {
         base.Init(stateName, animName, stateMachine);
-        _psm.psl.horizontalInput = 0f;
-        _psm.psl.isFacingRight = true;
+        _psm.pdl.HORIZONTAL_INPUT = 0f;
+        _psm.pdl.IS_FACING_RIGHT = true;
     }
 
     public override void OnEnter()
@@ -21,8 +21,8 @@ public class Grounded : MovementState
         base.OnUpdate();
 
         //Debug.Log(jumpCooldown.ToString("F3"));
-        _psm.psl.jumpCooldown = _psm.psl.jumpCooldown > 0 ? 
-            _psm.psl.jumpCooldown - Time.deltaTime
+        _psm.pdl.JUMP_COOLDOWN = _psm.pdl.JUMP_COOLDOWN > 0 ? 
+            _psm.pdl.JUMP_COOLDOWN - Time.deltaTime
             : 0f;
     }
 }

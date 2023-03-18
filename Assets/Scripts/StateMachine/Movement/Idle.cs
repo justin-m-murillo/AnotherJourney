@@ -18,13 +18,13 @@ public class Idle : Grounded
     {
         base.OnUpdate();
 
-        if (Mathf.Abs(_psm.psl.horizontalInput) < Mathf.Epsilon) return;
+        if (Mathf.Abs(_psm.pdl.HORIZONTAL_INPUT) < Mathf.Epsilon) return;
         stateMachine.ChangeState(_psm.movingState);
     }
 
     public override void OnFixedUpdate()
     {
         base.OnFixedUpdate();
-        _psm.psl.ApplyGroundDrag(_psm.RigBody, _psm.DragFactor);
+        _psm.pdl.INVOKE_GROUND_DRAG(_psm.RigBody, _psm.DragFactor);
     }
 }

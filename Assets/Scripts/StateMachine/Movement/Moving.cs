@@ -19,16 +19,16 @@ public class Moving : Grounded
     {
         base.OnUpdate();
 
-        if (!_psm.psl.isFacingRight && _psm.psl.horizontalInput > 0f)
+        if (!_psm.pdl.IS_FACING_RIGHT && _psm.pdl.HORIZONTAL_INPUT > 0f)
         {
             Flip();
         }
-        if (_psm.psl.isFacingRight && _psm.psl.horizontalInput < 0f)
+        if (_psm.pdl.IS_FACING_RIGHT && _psm.pdl.HORIZONTAL_INPUT < 0f)
         {
             Flip();
         }
 
-        if (Mathf.Abs(_psm.psl.horizontalInput) < Mathf.Epsilon)
+        if (Mathf.Abs(_psm.pdl.HORIZONTAL_INPUT) < Mathf.Epsilon)
         {
             stateMachine.ChangeState(_psm.idleState);
         }
@@ -39,13 +39,13 @@ public class Moving : Grounded
         base.OnFixedUpdate();
 
         Vector2 vel = _psm.RigBody.velocity;
-        vel.x = _psm.psl.horizontalInput * _psm.MovementSpeed;
+        vel.x = _psm.pdl.HORIZONTAL_INPUT * _psm.MovementSpeed;
         _psm.RigBody.velocity = vel;
     }
 
     private void Flip()
     {
-        _psm.psl.isFacingRight = !_psm.psl.isFacingRight;
+        _psm.pdl.IS_FACING_RIGHT = !_psm.pdl.IS_FACING_RIGHT;
         Vector3 localScale = _psm.CharacterTransform.localScale;
         localScale.x *= -1f;
         _psm.CharacterTransform.localScale = localScale;

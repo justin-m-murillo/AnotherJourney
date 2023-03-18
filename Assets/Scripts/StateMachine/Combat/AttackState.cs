@@ -12,20 +12,20 @@ public class AttackState : CombatState
     {
         base.OnEnter();
 
-        _psm.psl.comboDelay = _psm.psl.defaultComboDelay; // delay between attacks to avoid animation canceling
-        _psm.psl.comboDuration = _psm.psl.defaultComboDuration; // duration to execute another attack before exiting 
+        _psm.pdl.ATTACK_DURATION = _psm.pdl.DEFAULT_ATTACK_DURATION; // delay between attacks to avoid animation canceling
+        _psm.pdl.COMBO_DURATION = _psm.pdl.DEFAULT_COMBO_DURATION; // duration to execute another attack before exiting 
         _psm.Anim.ChangeAnimationState(_animName); 
-        _psm.psl.comboIndex++;
+        _psm.pdl.COMBO_INDEX++;
 
-        if (!_psm.psl.IsGrounded(_psm.RigBody, _psm.GroundLayer)) return;
-        _psm.psl.ApplyGroundDrag(_psm.RigBody, _psm.DragFactor, 3f);
+        if (!_psm.pdl.INVOKE_IS_GROUNDED(_psm.RigBody, _psm.GroundLayer)) return;
+        _psm.pdl.INVOKE_GROUND_DRAG(_psm.RigBody, _psm.DragFactor, 3f);
         AttackPush();
     }
 
     public override void OnUpdate()
     {
         base.OnUpdate();
-        _psm.psl.canAttack = TimeComboDelay();
+        _psm.pdl.CAN_ATTACK = TimeComboDelay();
         bool change = TimeComboDuration();
         
         if (!change) return;
@@ -34,27 +34,27 @@ public class AttackState : CombatState
 
     private bool TimeComboDelay()
     {
-        _psm.psl.comboDelay = _psm.psl.comboDelay > 0 ?
-            _psm.psl.comboDelay - Time.deltaTime
+        _psm.pdl.ATTACK_DURATION = _psm.pdl.ATTACK_DURATION > 0 ?
+            _psm.pdl.ATTACK_DURATION - Time.deltaTime
             : 0;
 
-        return _psm.psl.comboDelay == 0;
+        return _psm.pdl.ATTACK_DURATION == 0;
     }
 
     private bool TimeComboDuration()
     {
-        _psm.psl.comboDuration = _psm.psl.comboDuration > 0 ?
-            _psm.psl.comboDuration - Time.deltaTime
+        _psm.pdl.COMBO_DURATION = _psm.pdl.COMBO_DURATION > 0 ?
+            _psm.pdl.COMBO_DURATION - Time.deltaTime
             : 0;
 
-        return _psm.psl.comboDuration == 0;
+        return _psm.pdl.COMBO_DURATION == 0;
     }
 
     private void AttackPush()
     {
-        float facing = _psm.psl.isFacingRight ? 1f : -1f;
+        float facing = _psm.pdl.IS_FACING_RIGHT ? 1f : -1f;
         Vector2 vel = _psm.RigBody.velocity;
-        vel.x += facing * _psm.AttackPushValue;
+        vel.x += facing * _psm.pdl.ATTACK_PUSH_VALUE;
         _psm.RigBody.velocity = vel;
     }
 }

@@ -18,7 +18,7 @@ public class Block : CombatState
     {
         base.OnUpdate();
 
-        if (_psm.psl.isBlocking) return;
+        if (_psm.pdl.IS_BLOCKING) return;
         stateMachine.ChangeState(_psm.idleState);
     }
 
@@ -26,7 +26,7 @@ public class Block : CombatState
     {
         base.OnFixedUpdate();
 
-        if (!_psm.psl.IsGrounded(_psm.RigBody, _psm.GroundLayer)) return;
-        _psm.psl.SetModifiedMovementSpeed(_psm.RigBody, _psm.psl.blockWalkSpeed);
+        if (!_psm.pdl.INVOKE_IS_GROUNDED(_psm.RigBody, _psm.GroundLayer)) return;
+        _psm.pdl.INVOKE_SET_MODIFIED_MOVE_SPEED(_psm.RigBody, _psm.pdl.BLOCK_WALK_SPEED);
     }
 }

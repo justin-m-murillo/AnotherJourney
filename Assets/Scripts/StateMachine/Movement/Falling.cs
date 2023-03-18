@@ -9,7 +9,7 @@ public class Falling : MovementState
     {
         base.OnEnter();
 
-        _psm.psl.InvokeGravityScalar(_psm.RigBody, _psm.GravityFall);
+        _psm.pdl.INVOKE_GRAVITY_SCALAR(_psm.RigBody, _psm.GravityFall);
         _psm.Anim.ChangeAnimationState(_animName);
     }
 
@@ -17,14 +17,14 @@ public class Falling : MovementState
     {
         base.OnExit();
 
-        _psm.psl.jumpCooldown = _psm.psl.defaultJumpCooldown;
+        _psm.pdl.JUMP_COOLDOWN = _psm.pdl.DEFAULT_JUMP_COOLDOWN;
     }
 
     public override void OnUpdate()
     {
         base.OnUpdate();
 
-        if (!_psm.psl.IsGrounded(_psm.RigBody, _psm.GroundLayer)) return;
+        if (!_psm.pdl.INVOKE_IS_GROUNDED(_psm.RigBody, _psm.GroundLayer)) return;
         stateMachine.ChangeState(_psm.idleState);
     }
 }

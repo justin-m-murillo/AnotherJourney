@@ -15,7 +15,7 @@ public class BowRelease : CombatState
     public override void OnEnter()
     {
         base.OnEnter();
-        animationTimer = _psm.psl.bowReleaseAnimTimer;
+        animationTimer = _psm.pdl.BOW_RELEASE_ANIM_DURATION;
         _psm.Anim.ChangeAnimationState(_animName);
     }
 

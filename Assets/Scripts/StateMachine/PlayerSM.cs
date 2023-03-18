@@ -36,7 +36,7 @@ public class PlayerSM : StateMachine
     public Block blockState;
 
     [Tooltip("Player Static Library contains all static variables required for this state machine")]
-    public PlayerStatics psl;
+    public PlayerDataLibrary pdl;
     [Tooltip("Character transform")]
     [SerializeField] Transform _characterTransform;
     [Tooltip("Ground layer mask")]
@@ -111,11 +111,6 @@ public class PlayerSM : StateMachine
     /// </summary>
     public float GravityFall { get; set; }
 
-    /// <summary>
-    /// Amount to nudge the character forward while attacking
-    /// </summary>
-    public float AttackPushValue { get; set; }
-
 
     void Awake()
     {
@@ -177,7 +172,6 @@ public class PlayerSM : StateMachine
         Anim = ScriptableObject.CreateInstance<AnimController>();
         Anim.SetAnimator(GetComponentInChildren<Animator>());
 
-        //HorizontalInput = 0f;
         MovementSpeed = _defaultMovementSpeed;
         DragFactor = _defaultDragFactor;
 
@@ -187,7 +181,6 @@ public class PlayerSM : StateMachine
         GravityStored = RigBody.gravityScale;
         GravityFall = _defaultGravityFall;
 
-        AttackPushValue = _attackPush;
     }
 
     /// <summary>
