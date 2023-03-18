@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class BowDraw : CombatState
 {
-    public BowDraw(PlayerSM stateMachine) : base("BowDraw", "P_BowDraw", stateMachine) { }
+    //public BowDraw(PlayerSM stateMachine) : base("BowDraw", "P_BowDraw", stateMachine) { }
+    public override void Init(string stateName, string animName, PlayerSM stateMachine)
+    {
+        base.Init(stateName, animName, stateMachine);
+    }
 
     public override void OnEnter()
     {

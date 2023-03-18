@@ -1,6 +1,9 @@
 public class Falling : MovementState
 {
-    public Falling(PlayerSM stateMachine) : base("Falling", "P_Falling", stateMachine) { }
+    public override void Init(string stateName, string animName, PlayerSM stateMachine)
+    {
+        base.Init(stateName, animName, stateMachine);
+    }
 
     public override void OnEnter()
     {

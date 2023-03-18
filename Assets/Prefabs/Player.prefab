@@ -238,6 +238,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: bab0b3ff-19f8-445e-9b0e-308bb6f8e8a8
     m_ActionName: PlayerControlsMap/Attack[/Keyboard/j]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f3ac69d2-e28e-4137-8c6f-d5f8d3ca70e9
+    m_ActionName: PlayerControlsMap/Bow[/Keyboard/k]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerControlsMap
@@ -255,7 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e6a9bf90ef8230478856321b8444e7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  psm: {fileID: 8037024654266756644}
+  _psm: {fileID: 8037024654266756644}
 --- !u!114 &8037024654266756644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,6 +272,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4083812f43b88904ca20af5f86f78eee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: {fileID: 0}
+  idleState: {fileID: 0}
+  movingState: {fileID: 0}
+  jumpState: {fileID: 0}
+  fallingState: {fileID: 0}
+  attackOne: {fileID: 0}
+  attackTwo: {fileID: 0}
+  attackThree: {fileID: 0}
+  attackFour: {fileID: 0}
+  attackFive: {fileID: 0}
+  attackStates: []
+  bowDraw: {fileID: 0}
+  bowRelease: {fileID: 0}
   psl: {fileID: 11400000, guid: 3d531a5238b6d4945b829e916a06ed9f, type: 2}
   _characterTransform: {fileID: 2514173954590323129}
   _groundLayer:
@@ -276,6 +293,6 @@ MonoBehaviour:
   _rb: {fileID: 2514173954590323078}
   _defaultMovementSpeed: 8
   _defaultDragFactor: 12
-  _defaultJumpForce: 16
+  _defaultJumpForce: 18
   _defaultGravityFall: 7
   _attackPush: 4

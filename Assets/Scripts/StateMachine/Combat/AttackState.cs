@@ -2,7 +2,11 @@ using UnityEngine;
 
 public class AttackState : CombatState
 {
-    public AttackState(PlayerSM stateMachine, int index) : base("Attack" + (index + 1), "P_Attack" + (index + 1), stateMachine) { }
+    //public AttackState(PlayerSM stateMachine, int index) : base("Attack" + (index + 1), "P_Attack" + (index + 1), stateMachine) { }
+    public override void Init(string stateName, string animName, PlayerSM stateMachine)
+    {
+        base.Init(stateName, animName, stateMachine);
+    }
 
     public override void OnEnter()
     {

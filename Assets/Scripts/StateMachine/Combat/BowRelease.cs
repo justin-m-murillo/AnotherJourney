@@ -6,7 +6,11 @@ public class BowRelease : CombatState
 {
     private float animationTimer;
 
-    public BowRelease(PlayerSM stateMachine) : base("BowRelease", "P_BowRelease", stateMachine) { }
+    //public BowRelease(PlayerSM stateMachine) : base("BowRelease", "P_BowRelease", stateMachine) { }
+    public override void Init(string stateName, string animName, PlayerSM stateMachine)
+    {
+        base.Init(stateName, animName, stateMachine);
+    }
 
     public override void OnEnter()
     {

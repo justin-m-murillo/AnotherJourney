@@ -116,19 +116,44 @@ public class PlayerSM : StateMachine
 
     void Awake()
     {
-        idleState = new Idle(this);
-        movingState = new Moving(this);
-        jumpState = new Jump(this);
-        fallingState = new Falling(this);
+        idleState   = ScriptableObject.CreateInstance<Idle>();
+        movingState = ScriptableObject.CreateInstance<Moving>();
+        jumpState   = ScriptableObject.CreateInstance<Jump>();
+        fallingState= ScriptableObject.CreateInstance<Falling>();
 
-        attackOne   = new(this, 0);
-        attackTwo   = new(this, 1);
-        attackThree = new(this, 2);
-        attackFour  = new(this, 3);
-        attackFive  = new(this, 4);
+        attackOne   = ScriptableObject.CreateInstance<AttackState>();
+        attackTwo   = ScriptableObject.CreateInstance<AttackState>();
+        attackThree = ScriptableObject.CreateInstance<AttackState>();
+        attackFour  = ScriptableObject.CreateInstance<AttackState>();
+        attackFive  = ScriptableObject.CreateInstance<AttackState>();
 
-        bowDraw = new(this);
-        bowRelease = new(this);
+        bowDraw     = ScriptableObject.CreateInstance<BowDraw>();
+        bowRelease  = ScriptableObject.CreateInstance<BowRelease>();
+
+        idleState
+            .Init("Idle", "P_Idle", this);
+        movingState
+            .Init("Moving", "P_Moving", this);
+        jumpState
+            .Init("Jump", "P_Jump", this);
+        fallingState
+            .Init("Falling", "P_Falling", this);
+
+        attackOne
+            .Init("Attack1", "P_Attack1", this);
+        attackTwo
+            .Init("Attack2", "P_Attack2", this);
+        attackThree
+            .Init("Attack3", "P_Attack3", this);
+        attackFour
+            .Init("Attack4", "P_Attack4", this);
+        attackFive
+            .Init("Attack5", "P_Attack5", this);
+
+        bowDraw
+            .Init("BowDraw", "P_BowDraw", this);
+        bowRelease
+            .Init("BowRelease", "P_BowRelease", this);
 
         attackStates = new AttackState[]
         {

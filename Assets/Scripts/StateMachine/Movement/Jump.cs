@@ -5,7 +5,10 @@ using UnityEngine.InputSystem;
 
 public class Jump : MovementState
 {
-    public Jump(PlayerSM stateMachine) : base("Jump", "P_Jump", stateMachine) { }
+    public override void Init(string stateName, string animName, PlayerSM stateMachine)
+    {
+        base.Init(stateName, animName, stateMachine);
+    }
 
     public override void OnEnter()
     {

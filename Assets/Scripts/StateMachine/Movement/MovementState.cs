@@ -1,7 +1,8 @@
 public class MovementState : ContainerState
 {
-    public MovementState(string name, string animName, PlayerSM stateMachine) : base(name, animName, stateMachine)
+    public override void Init(string stateName, string animName, PlayerSM stateMachine)
     {
+        base.Init(stateName, animName, stateMachine);
         _psm.psl.jumped = false;
     }
 

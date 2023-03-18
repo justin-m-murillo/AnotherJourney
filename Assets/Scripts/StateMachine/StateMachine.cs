@@ -44,7 +44,7 @@ public class StateMachine : MonoBehaviour
 
     private void OnGUI()
     {
-        string content = currentState != null ? currentState.name : "(no current state)";
+        string content = currentState != null ? currentState.stateName : "(no current state)";
         GUILayout.Label($"<color='black'><size=40>{content}</size></color>");
     }
 }

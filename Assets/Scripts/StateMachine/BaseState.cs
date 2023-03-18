@@ -1,15 +1,17 @@
-public class BaseState
+using UnityEngine;
+
+public class BaseState : ScriptableObject
 {
-    public string name;
+    public string stateName;
     protected StateMachine stateMachine;
 
-    public BaseState(string name, StateMachine stateMachine)
-    {
-        this.name = name;
+    public virtual void Init(
+        string stateName, 
+        StateMachine stateMachine) 
+    { 
+        this.stateName = stateName;
         this.stateMachine = stateMachine;
-        
     }
-
     public virtual void OnEnter() { }
     public virtual void OnFixedUpdate() { }
     public virtual void OnUpdate() { }

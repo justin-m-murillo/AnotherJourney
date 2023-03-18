@@ -2,7 +2,10 @@ using UnityEngine;
 
 public class CombatState : ContainerState
 {
-    public CombatState(string name, string animName, PlayerSM stateMachine) : base(name, animName, stateMachine) { }
+    public override void Init(string stateName, string animName, PlayerSM stateMachine)
+    {
+        base.Init(stateName, animName, stateMachine);
+    }
 
     public override void OnEnter()
     {
