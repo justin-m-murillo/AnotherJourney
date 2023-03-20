@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,11 +5,16 @@ public class InputController : MonoBehaviour
 {
     [SerializeField] PlayerSM _psm;
 
+    private bool _jumpPerformed;
+
     private static PlayerControls playerControls;
+
+    private GameObject _projectile;
 
     private void Awake()
     {
         playerControls = new PlayerControls();
+        _jumpPerformed = false;
     }
 
     private void OnEnable()
@@ -39,7 +42,7 @@ public class InputController : MonoBehaviour
 
     private void Update()
     {
-        _psm.pdl.HORIZONTAL_INPUT = playerControls.PlayerControlsMap.Move.ReadValue<Vector2>().x;
+       _psm.pdl.HORIZONTAL_INPUT = playerControls.PlayerControlsMap.Move.ReadValue<Vector2>().x;
     }
 
     public void JumpStarted(InputAction.CallbackContext context)
@@ -52,7 +55,7 @@ public class InputController : MonoBehaviour
         /////////////////////////////////////////////////////////////////
         
         _psm.pdl.IS_JUMP = true;
-        _psm.JumpPerformed = false;
+        _jumpPerformed = false;
         _psm.currentState
             .GetStateMachine()
             .ChangeState(_psm.jumpState);
@@ -60,16 +63,16 @@ public class InputController : MonoBehaviour
 
     public void JumpPerformed(InputAction.CallbackContext context)
     {
-        _psm.JumpPerformed = true;
+        _jumpPerformed = true;
     }
 
     public void JumpCanceled(InputAction.CallbackContext context)
     {
         // BREAK CONDITIONS
-        if (_psm.JumpPerformed) return;
+        if (_jumpPerformed) return;
         /////////////////////////////////////////////////////////////////
 
-        _psm.pdl.INVOKE_GRAVITY_SCALAR(_psm.RigBody, _psm.GravityFall);
+        _psm.pdl.INVOKE_GRAVITY_SCALAR(_psm.RigBody, _psm.pdl.BASE_GRAVITY_SCALE, 1.5f);
     }
 
     public void AttackStarted(InputAction.CallbackContext context)

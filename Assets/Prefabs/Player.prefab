@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2514173954286973711}
   - component: {fileID: 2514173954286973708}
   - component: {fileID: 2514173954286973706}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,9 +119,9 @@ GameObject:
   - component: {fileID: 2514173954590323077}
   - component: {fileID: 1918852716}
   - component: {fileID: 8037024654266756644}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -139,6 +139,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2514173954286973711}
+  - {fileID: 5788701413825255157}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -242,6 +243,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: f3ac69d2-e28e-4137-8c6f-d5f8d3ca70e9
     m_ActionName: PlayerControlsMap/Bow[/Keyboard/k]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b45e8b56-c367-4501-8926-7d153d792c64
+    m_ActionName: PlayerControlsMap/Block[/Keyboard/leftShift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerControlsMap
@@ -285,14 +290,41 @@ MonoBehaviour:
   attackStates: []
   bowDraw: {fileID: 0}
   bowRelease: {fileID: 0}
-  psl: {fileID: 11400000, guid: 3d531a5238b6d4945b829e916a06ed9f, type: 2}
-  _characterTransform: {fileID: 2514173954590323129}
+  blockState: {fileID: 0}
+  pdl: {fileID: 11400000, guid: 3d531a5238b6d4945b829e916a06ed9f, type: 2}
+  arrowSpawnPosition: {fileID: 5788701413825255157}
+  arrowPrefab: {fileID: 6767634149926608796, guid: e6ecf64b54e8996478e2e4f462449c94, type: 3}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 256
-  _rb: {fileID: 2514173954590323078}
-  _defaultMovementSpeed: 8
-  _defaultDragFactor: 12
-  _defaultJumpForce: 18
-  _defaultGravityFall: 7
-  _attackPush: 4
+--- !u!1 &5836274471308081869
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5788701413825255157}
+  m_Layer: 6
+  m_Name: Arrow Spawn Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5788701413825255157
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5836274471308081869}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.181, y: -0.17, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2514173954590323129}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
