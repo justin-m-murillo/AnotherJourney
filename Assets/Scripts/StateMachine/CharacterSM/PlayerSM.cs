@@ -33,6 +33,9 @@ public class PlayerSM : StateMachine
     public BowRelease bowRelease;
 
     [HideInInspector]
+    public Magic magicState;
+
+    [HideInInspector]
     public Block blockState;
 
     [Tooltip("Player Data Library contains all variables required for this state machine")]
@@ -86,6 +89,8 @@ public class PlayerSM : StateMachine
         bowDraw     = ScriptableObject.CreateInstance<BowDraw>();
         bowRelease  = ScriptableObject.CreateInstance<BowRelease>();
 
+        magicState  = ScriptableObject.CreateInstance<Magic>();
+
         blockState  = ScriptableObject.CreateInstance<Block>(); 
 
         idleState
@@ -112,8 +117,13 @@ public class PlayerSM : StateMachine
             .Init("BowDraw", "P_BowDraw", this);
         bowRelease
             .Init("BowRelease", "P_BowRelease", this);
+
+        magicState
+            .Init("Magic", "P_Magic", this);
+
         blockState
             .Init("Block", "P_Block", this);
+
 
         attackStates = new AttackState[]
         {

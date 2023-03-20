@@ -13,14 +13,4 @@ public class CombatState : ContainerState
         _psm.pdl.JUMP_COOLDOWN = _psm.pdl.BASE_JUMP_COOLDOWN; // jump cooldown prevents awkward animation canceling
         
     }
-
-    public override void OnExit()
-    {
-        base.OnExit();
-    }
-
-    public override void OnUpdate()
-    {
-        base.OnUpdate();
-    }
 }

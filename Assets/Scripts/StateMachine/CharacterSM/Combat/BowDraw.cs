@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BowDraw : CombatState
@@ -41,7 +39,8 @@ public class BowDraw : CombatState
     public override void OnUpdate()
     { 
         base.OnUpdate();
-        _psm.pdl.CAN_BOW = TimeBowFireDelay();
+
+        _psm.pdl.CAN_BOW = StateTimer(ref _psm.pdl.BOW_CHARGE_TIMER, 0, true);
 
         if (_psm.pdl.BOW_DRAWN) return;
         stateMachine.ChangeState(_psm.bowRelease);
@@ -50,16 +49,8 @@ public class BowDraw : CombatState
     public override void OnFixedUpdate()
     {
         base.OnFixedUpdate();
+
         if (!_psm.pdl.INVOKE_IS_GROUNDED(_psm.RigBody, _psm.GroundLayer)) return;
         _psm.pdl.INVOKE_SET_MODIFIED_MOVE_SPEED(_psm.RigBody, _psm.pdl.BOW_WALK_SPEED);
-    }
-
-    private bool TimeBowFireDelay()
-    {
-        _psm.pdl.BOW_CHARGE_TIMER = _psm.pdl.BOW_CHARGE_TIMER > 0 ?
-            _psm.pdl.BOW_CHARGE_TIMER - Time.deltaTime : 
-            0;
-
-        return _psm.pdl.BOW_CHARGE_TIMER == 0;
     }
 }

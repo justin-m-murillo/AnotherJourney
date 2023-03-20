@@ -23,6 +23,14 @@ public class PlayerDataLibrary : CharacterDataLibrary
     [Tooltip("Duration to charge successful shot")]
     public float BOW_CHARGE_TIMER;
 
+    [Header("Magic Attack")]
+    [Space(8)]
+
+    [Tooltip("If the player can execute a magic attack")]
+    public bool CAN_MAGIC;
+    [Tooltip("The time given for the magic animation to complete")]
+    public float MAGIC_ANIM_DURATION;
+
     [Header("Shield Block")]
     [Space(8)]
     

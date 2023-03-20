@@ -15,7 +15,6 @@ public class Projectile : MonoBehaviour
 
     private bool _playedChargedAnim;
     private bool _playedExplosionAnim;
-    private int _direction;
     private bool _fired;
 
     private void Start()
@@ -27,7 +26,6 @@ public class Projectile : MonoBehaviour
         IsCharged = false;
         _playedChargedAnim = false;
         _playedExplosionAnim = false;
-        _direction = 0;
         _fired = false;
 
         Anim = ScriptableObject.CreateInstance<AnimStateManager>();
@@ -44,7 +42,6 @@ public class Projectile : MonoBehaviour
         
         if (IsCharged && !_playedChargedAnim)
         {
-            Debug.Log("Play Charged");
             Anim.ChangeAnimationState(projdl.CHARGED_NAME);
             _playedChargedAnim = true;
         }
@@ -63,7 +60,7 @@ public class Projectile : MonoBehaviour
 
         if (collision.gameObject.TryGetComponent(out PhysicsReceiver pr))
         {
-            pr.ApplyPush(Speed, _direction);
+            pr.ApplyPush(Speed);
         }
 
         _rb.velocity = Vector2.zero;
@@ -85,8 +82,8 @@ public class Projectile : MonoBehaviour
         Anim.ChangeAnimationState(projdl.RELEASE_NAME);
         _fired = true;
         transform.parent = null;
-        _direction = facingRight ? 1 : -1;
-        Speed = _direction * Speed * (ChargeTime / projdl.BASE_CHARGE_TIME);
+        int dir = facingRight ? 1 : -1;
+        Speed = dir * Speed * (ChargeTime / projdl.BASE_CHARGE_TIME);
         _rb.AddForce(new Vector2( Speed, 0 ), ForceMode2D.Impulse);
     }
 

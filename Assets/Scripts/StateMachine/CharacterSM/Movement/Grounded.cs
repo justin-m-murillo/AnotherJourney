@@ -20,9 +20,6 @@ public class Grounded : MovementState
     {
         base.OnUpdate();
 
-        //Debug.Log(jumpCooldown.ToString("F3"));
-        _psm.pdl.JUMP_COOLDOWN = _psm.pdl.JUMP_COOLDOWN > 0 ? 
-            _psm.pdl.JUMP_COOLDOWN - Time.deltaTime
-            : 0f;
+        StateTimer(ref _psm.pdl.JUMP_COOLDOWN, 0, true);        
     }
 }

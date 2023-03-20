@@ -23,9 +23,8 @@ public class PhysicsReceiver : MonoBehaviour
     /// </summary>
     /// <param name="force">Force to be applied</param>
     /// <param name="direction">Direction of source</param>
-    public void ApplyPush(float force, int direction)
+    public void ApplyPush(float force)
     {
-        _rb.AddForce(new Vector2(force * direction, 0), ForceMode2D.Impulse);
-        
+        _rb.AddForce(new Vector2(force, 0), ForceMode2D.Impulse);
     }
 }
