@@ -12,6 +12,8 @@ public class ProjectileDataLibrary : ScriptableObject
     public string CHARGED_NAME;
     [Tooltip("Release state name")]
     public string RELEASE_NAME;
+    [Tooltip("Explosion anim name")]
+    public string EXPLOSION_NAME;
 
     [Tooltip("Base speed of the projectile. Parameter to AddForce.Impulse")]
     public float BASE_SPEED;

@@ -15,6 +15,7 @@ MonoBehaviour:
   SPAWN_NAME: BasicArrow_spawn
   CHARGED_NAME: BasicArrow_charged
   RELEASE_NAME: BasicArrow_release
+  EXPLOSION_NAME: BasicArrow_explosion
   BASE_SPEED: 25
   BASE_DAMAGE: 5
   BASE_CHARGE_TIME: 0.5
