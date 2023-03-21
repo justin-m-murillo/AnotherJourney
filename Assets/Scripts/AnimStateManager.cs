@@ -11,6 +11,7 @@ public class AnimStateManager : ScriptableObject
     {
         // stop animation from interrupting self
         if (currentState == nextState) return;
+        if (nextState.CompareTo("") == 0) return;
         // player next animation
         _anim.enabled = false;
         _anim.enabled = true;

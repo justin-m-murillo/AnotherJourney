@@ -33,17 +33,26 @@ public class PlayerSM : StateMachine
     public BowRelease bowRelease;
 
     [HideInInspector]
-    public Magic magicState;
+    public MagicDraw magicDraw;
+    [HideInInspector]
+    public MagicRelease magicRelease;
 
     [HideInInspector]
     public Block blockState;
 
     [Tooltip("Player Data Library contains all variables required for this state machine")]
     public PlayerDataLibrary pdl;
+
     [Tooltip("Local position to instantiate an arrow")]
     public Transform arrowSpawnPosition;
     [Tooltip("Arrow Prefab")]
     public GameObject arrowPrefab;
+
+    [Tooltip("Local position to instantiate magic object")]
+    public Transform magicSpawnPosition;
+    [Tooltip("Magic Prefab")]
+    public GameObject magicPrefab;
+
     [Tooltip("Ground layer mask")]
     [SerializeField] LayerMask _groundLayer;
 
@@ -89,7 +98,8 @@ public class PlayerSM : StateMachine
         bowDraw     = ScriptableObject.CreateInstance<BowDraw>();
         bowRelease  = ScriptableObject.CreateInstance<BowRelease>();
 
-        magicState  = ScriptableObject.CreateInstance<Magic>();
+        magicDraw   = ScriptableObject.CreateInstance<MagicDraw>();
+        magicRelease= ScriptableObject.CreateInstance<MagicRelease>();
 
         blockState  = ScriptableObject.CreateInstance<Block>(); 
 
@@ -118,8 +128,10 @@ public class PlayerSM : StateMachine
         bowRelease
             .Init("BowRelease", "P_BowRelease", this);
 
-        magicState
-            .Init("Magic", "P_Magic", this);
+        magicDraw
+            .Init("MagicDraw", "P_MagicDraw", this);
+        magicRelease
+            .Init("MagicRelease", "P_MagicRelease", this);
 
         blockState
             .Init("Block", "P_Block", this);

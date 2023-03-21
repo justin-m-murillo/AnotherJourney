@@ -164,7 +164,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""37119b10-1796-4fc3-b579-97f2665e1eaa"",
                     ""path"": ""<Keyboard>/l"",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Magic"",

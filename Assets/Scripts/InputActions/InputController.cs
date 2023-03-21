@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 
 public class InputController : MonoBehaviour
 {
@@ -40,6 +41,7 @@ public class InputController : MonoBehaviour
         playerControls.PlayerControlsMap.Bow.canceled += Bow_canceled;
 
         playerControls.PlayerControlsMap.Magic.started += Magic_started;
+        playerControls.PlayerControlsMap.Magic.canceled += Magic_canceled;
 
         playerControls.PlayerControlsMap.Block.started += Block_started;
         playerControls.PlayerControlsMap.Block.canceled += Block_canceled;
@@ -77,7 +79,10 @@ public class InputController : MonoBehaviour
         if (_jumpPerformed) return;
         /////////////////////////////////////////////////////////////////
 
-        _psm.pdl.INVOKE_GRAVITY_SCALAR(_psm.RigBody, _psm.pdl.BASE_GRAVITY_SCALE, 1.5f);
+        _psm.pdl.INVOKE_GRAVITY_SCALAR(
+            _psm.RigBody, 
+            _psm.pdl.BASE_GRAVITY_SCALE, 
+            1.5f);
     }
 
     public void Attack_started(InputAction.CallbackContext context)
@@ -86,10 +91,10 @@ public class InputController : MonoBehaviour
         if (!_psm.pdl.CAN_ATTACK) return;
         /////////////////////////////////////////////////////////////////
 
-        if (_psm.pdl.COMBO_INDEX > _psm.attackStates.Length - 1)
-        {
-            _psm.pdl.COMBO_INDEX = 0;
-        }
+        _psm.pdl.COMBO_INDEX =
+            _psm.pdl.COMBO_INDEX > _psm.attackStates.Length - 1 ?
+            _psm.pdl.COMBO_INDEX = 0 :
+            _psm.pdl.COMBO_INDEX;
 
         _psm.pdl.CAN_ATTACK = false;
         _psm.currentState
@@ -103,8 +108,6 @@ public class InputController : MonoBehaviour
         if (!_psm.pdl.CAN_BOW) return;
         /////////////////////////////////////////////////////////////////
 
-        _psm.pdl.CAN_BOW = false;
-        _psm.pdl.BOW_DRAWN = true;
         _psm.currentState
             .GetStateMachine()
             .ChangeState(_psm.bowDraw);
@@ -123,7 +126,12 @@ public class InputController : MonoBehaviour
 
         _psm.currentState
             .GetStateMachine()
-            .ChangeState(_psm.magicState);
+            .ChangeState(_psm.magicDraw);
+    }
+
+    public void Magic_canceled(InputAction.CallbackContext context)
+    {
+        _psm.pdl.MAGIC_DRAWN = false;
     }
     
     public void Block_started(InputAction.CallbackContext context)

@@ -18,9 +18,9 @@ public class PlayerDataLibrary : CharacterDataLibrary
     public float BOW_WALK_SPEED;
     [Tooltip("The time given for the bow release animation to complete")]
     public float BOW_RELEASE_ANIM_DURATION;
-    [Tooltip("Base duration to charge successful shot")]
+    [Tooltip("Base duration to charge successful bow attack")]
     public float BASE_BOW_CHARGE_TIMER;
-    [Tooltip("Duration to charge successful shot")]
+    [Tooltip("Duration to charge successful bow attack")]
     public float BOW_CHARGE_TIMER;
 
     [Header("Magic Attack")]
@@ -28,8 +28,16 @@ public class PlayerDataLibrary : CharacterDataLibrary
 
     [Tooltip("If the player can execute a magic attack")]
     public bool CAN_MAGIC;
+    [Tooltip("If the player currently has magic drawn")]
+    public bool MAGIC_DRAWN;
+    [Tooltip("Player movement speed while magic is drawn")]
+    public float MAGIC_WALK_SPEED;
     [Tooltip("The time given for the magic animation to complete")]
-    public float MAGIC_ANIM_DURATION;
+    public float MAGIC_RELEASE_ANIM_DURATION;
+    [Tooltip("Base duration to charge successful magic attack")]
+    public float BASE_MAGIC_CHARGE_TIMER;
+    [Tooltip("Duration to charge successful magic attack")]
+    public float MAGIC_CHARGE_TIMER;
 
     [Header("Shield Block")]
     [Space(8)]

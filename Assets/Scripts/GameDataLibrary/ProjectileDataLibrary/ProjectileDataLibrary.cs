@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class ProjectileDataLibrary : ScriptableObject
 {
+    [Tooltip("If this projectile's visibility is enabled upon instantiation")]
+    public bool VISIBLE_ON_START;
     [Tooltip("Spawn state name")]
     public string SPAWN_NAME;
     [Tooltip("Charged state name")]

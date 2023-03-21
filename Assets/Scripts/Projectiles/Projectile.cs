@@ -1,5 +1,10 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(CapsuleCollider2D))]
+[RequireComponent(typeof(Animator))]
+
 public class Projectile : MonoBehaviour
 {
     [SerializeField] ProjectileDataLibrary projdl; 
@@ -28,8 +33,10 @@ public class Projectile : MonoBehaviour
         _playedExplosionAnim = false;
         _fired = false;
 
+        gameObject.GetComponent<SpriteRenderer>().enabled = projdl.VISIBLE_ON_START;
+
         Anim = ScriptableObject.CreateInstance<AnimStateManager>();
-        Anim.SetAnimator(GetComponentInChildren<Animator>());
+        Anim.SetAnimator(GetComponent<Animator>());
     }
 
     private void Update()
@@ -60,11 +67,11 @@ public class Projectile : MonoBehaviour
 
         if (collision.gameObject.TryGetComponent(out PhysicsReceiver pr))
         {
-            pr.ApplyPush(Speed);
+            pr.ApplyPush(_rb.mass * Speed);
         }
 
         _rb.velocity = Vector2.zero;
-        Anim.ChangeAnimationState("BasicArrow_explosion");
+        Anim.ChangeAnimationState(projdl.EXPLOSION_NAME);
     }
 
     private bool ChargeProjectile()
@@ -79,6 +86,11 @@ public class Projectile : MonoBehaviour
 
     public void FireProjectile(bool facingRight)
     {
+        if (!projdl.VISIBLE_ON_START)
+        {
+            gameObject.GetComponent<SpriteRenderer>().enabled = !projdl.VISIBLE_ON_START;
+        }
+
         Anim.ChangeAnimationState(projdl.RELEASE_NAME);
         _fired = true;
         transform.parent = null;

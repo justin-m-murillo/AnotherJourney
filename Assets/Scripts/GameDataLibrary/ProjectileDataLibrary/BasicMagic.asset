@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 38ba9dadf87bd4348a110b77af7142ec, type: 3}
-  m_Name: BasicArrow
+  m_Name: BasicMagic
   m_EditorClassIdentifier: 
-  VISIBLE_ON_START: 1
-  SPAWN_NAME: BasicArrow_spawn
-  CHARGED_NAME: BasicArrow_charged
-  RELEASE_NAME: BasicArrow_release
-  EXPLOSION_NAME: BasicArrow_explosion
+  VISIBLE_ON_START: 0
+  SPAWN_NAME: BasicMagic_spawn
+  CHARGED_NAME: 
+  RELEASE_NAME: BasicMagic_release
+  EXPLOSION_NAME: BasicMagic_explosion
   BASE_SPEED: 25
-  BASE_DAMAGE: 5
-  BASE_CHARGE_TIME: 0.5
+  BASE_DAMAGE: 10
+  BASE_CHARGE_TIME: 0.01
   IS_CHARGED: 0
