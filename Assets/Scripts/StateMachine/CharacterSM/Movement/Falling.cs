@@ -1,31 +1,31 @@
 public class Falling : MovementState
 {
-    public override void Init(string stateName, string animName, PlayerSM stateMachine)
+    public Falling(string stateName, string animName, PlayerSM stateMachine) :
+        base(stateName, animName, stateMachine)
     {
-        base.Init(stateName, animName, stateMachine);
     }
 
     public override void OnEnter()
     {
         base.OnEnter();
 
-        _psm.Anim.ChangeAnimationState(_animName);
+        PSM.Anim.ChangeAnimationState(AnimName);
 
-        _psm.pdl.INVOKE_GRAVITY_SCALAR(_psm.RigBody, _psm.pdl.BASE_GRAVITY_SCALE);
+        PSM.pdl.INVOKE_GRAVITY_SCALAR(PSM.RB2D, PSM.pdl.BASE_GRAVITY_SCALE);
     }
 
     public override void OnExit()
     {
         base.OnExit();
 
-        _psm.pdl.JUMP_COOLDOWN = _psm.pdl.BASE_JUMP_COOLDOWN;
+        PSM.pdl.JUMP_COOLDOWN = PSM.pdl.BASE_JUMP_COOLDOWN;
     }
 
     public override void OnUpdate()
     {
         base.OnUpdate();
 
-        if (!_psm.pdl.INVOKE_IS_GROUNDED(_psm.RigBody, _psm.GroundLayer)) return;
-        stateMachine.ChangeState(_psm.idleState);
+        if (!PSM.pdl.INVOKE_IS_GROUNDED(PSM.RB2D, PSM.GroundLayer)) return;
+        PSM.ChangeState(PSM.idleState);
     }
 }

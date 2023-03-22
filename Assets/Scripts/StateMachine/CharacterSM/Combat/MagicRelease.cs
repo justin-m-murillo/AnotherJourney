@@ -1,39 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class MagicRelease : CombatState
 {
     private float _animationTimer;
 
-    public override void Init(string stateName, string animName, PlayerSM stateMachine)
+    public MagicRelease(string stateName, string animName, PlayerSM stateMachine) :
+        base(stateName, animName, stateMachine)
     {
-        base.Init(stateName, animName, stateMachine);
     }
 
     public override void OnEnter()
     {
         base.OnEnter();
 
-        Projectile p = _psm.LoadedProjectile.GetComponent<Projectile>();
-        p.FireProjectile(_psm.pdl.IS_FACING_RIGHT);
+        Projectile p = PSM.LoadedProjectile.GetComponent<Projectile>();
+        p.FireProjectile(PSM.pdl.IS_FACING_RIGHT);
 
-        _psm.Anim.ChangeAnimationState(_animName);
-        _animationTimer = _psm.pdl.MAGIC_RELEASE_ANIM_DURATION;
+        PSM.Anim.ChangeAnimationState(AnimName);
+        _animationTimer = PSM.pdl.MAGIC_RELEASE_ANIM_DURATION;
     }
 
     public override void OnExit()
     {
         base.OnExit();
 
-        _psm.pdl.CAN_MAGIC = true;
+        PSM.pdl.CAN_MAGIC = true;
     }
 
     public override void OnUpdate()
     {
         base.OnUpdate();
 
-        if (!StateTimer(ref _animationTimer, 0, true)) return;
-        stateMachine.ChangeState(_psm.idleState);
+        if (!Timer.StateTimer(ref _animationTimer, 0, true)) return;
+        PSM.ChangeState(PSM.idleState);
     }
 }

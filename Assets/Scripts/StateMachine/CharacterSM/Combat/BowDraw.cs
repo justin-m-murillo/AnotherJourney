@@ -1,59 +1,60 @@
+using System;
 using UnityEngine;
 
 public class BowDraw : CombatState
 {
-    public override void Init(string stateName, string animName, PlayerSM stateMachine)
+    public BowDraw(string stateName, string animName, PlayerSM stateMachine) :
+        base(stateName, animName, stateMachine)
     {
-        base.Init(stateName, animName, stateMachine);
     }
 
     public override void OnEnter()
     {
         base.OnEnter();
 
-        _psm.Anim.ChangeAnimationState(_animName);
+        PSM.Anim.ChangeAnimationState(AnimName);
 
-        _psm.pdl.CAN_BOW = false;
-        _psm.pdl.BOW_DRAWN = true;
+        PSM.pdl.CAN_BOW = false;
+        PSM.pdl.BOW_DRAWN = true;
 
-        _psm.pdl.BOW_CHARGE_TIMER = _psm.pdl.BASE_BOW_CHARGE_TIMER;
+        PSM.pdl.BOW_CHARGE_TIMER = PSM.pdl.BASE_BOW_CHARGE_TIMER;
 
-        _psm.LoadedProjectile = Instantiate(
-            _psm.arrowPrefab, 
-            _psm.arrowSpawnPosition);
+        PSM.LoadedProjectile = UnityEngine.Object.Instantiate(
+            PSM.arrowPrefab, 
+            PSM.arrowSpawnPosition);
 
-        if (!_psm.pdl.INVOKE_IS_GROUNDED(
-            _psm.RigBody, 
-            _psm.GroundLayer)) 
+        if (!PSM.pdl.INVOKE_IS_GROUNDED(
+            PSM.RB2D, 
+            PSM.GroundLayer)) 
             return;
 
-        Vector2 vel = _psm.RigBody.velocity;
-        vel.x = _psm.pdl.BOW_WALK_SPEED * _psm.pdl.HORIZONTAL_INPUT;
-        _psm.RigBody.velocity = vel;
+        Vector2 vel = PSM.RB2D.velocity;
+        vel.x = PSM.pdl.BOW_WALK_SPEED * PSM.pdl.HORIZONTAL_INPUT;
+        PSM.RB2D.velocity = vel;
     }
 
     public override void OnExit()
     {
         base.OnExit();
 
-        _psm.pdl.BOW_CHARGE_TIMER = 0f;
+        PSM.pdl.BOW_CHARGE_TIMER = 0f;
     }
 
     public override void OnUpdate()
     { 
         base.OnUpdate();
 
-        _psm.pdl.CAN_BOW = StateTimer(ref _psm.pdl.BOW_CHARGE_TIMER, 0, true);
+        PSM.pdl.CAN_BOW = Timer.StateTimer(ref PSM.pdl.BOW_CHARGE_TIMER, 0, true);
 
-        if (_psm.pdl.BOW_DRAWN) return;
-        stateMachine.ChangeState(_psm.bowRelease);
+        if (PSM.pdl.BOW_DRAWN) return;
+        PSM.ChangeState(PSM.bowRelease);
     }
 
     public override void OnFixedUpdate()
     {
         base.OnFixedUpdate();
 
-        if (!_psm.pdl.INVOKE_IS_GROUNDED(_psm.RigBody, _psm.GroundLayer)) return;
-        _psm.pdl.INVOKE_SET_MODIFIED_MOVE_SPEED(_psm.RigBody, _psm.pdl.BOW_WALK_SPEED);
+        if (!PSM.pdl.INVOKE_IS_GROUNDED(PSM.RB2D, PSM.GroundLayer)) return;
+        PSM.pdl.INVOKE_SET_MODIFIED_MOVE_SPEED(PSM.RB2D, PSM.pdl.BOW_WALK_SPEED);
     }
 }

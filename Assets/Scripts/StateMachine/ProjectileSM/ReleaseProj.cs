@@ -1,21 +1,19 @@
 public class ReleaseProj : ProjectileState
 {
-    public override void Init(string stateName, string animName, ProjSM stateMachine)
+    public ReleaseProj(string stateName, string animName, ProjSM stateMachine) :
+        base(stateName, animName, stateMachine)
     {
-        base.Init(stateName, animName, stateMachine);
     }
 
     public override void OnEnter()
     {
         base.OnEnter();
 
-        _projsm.Anim.ChangeAnimationState(_animName);
+        PrSM.Anim.ChangeAnimationState(AnimName);
 
-        float factor = _projsm.Proj.ChargeTime / _projsm.projdl.BASE_CHARGE_TIME;
+        float factor = PrSM.Proj.ChargeTime / PrSM.projdl.BASE_CHARGE_TIME;
 
-        _projsm.Proj.Speed *= factor;
-        _projsm.Proj.Damage *= factor;
-
-
+        PrSM.Proj.Speed *= factor;
+        PrSM.Proj.Damage *= factor;
     }
 }

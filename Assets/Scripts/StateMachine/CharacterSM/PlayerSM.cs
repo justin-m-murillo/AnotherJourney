@@ -56,20 +56,22 @@ public class PlayerSM : StateMachine
     [Tooltip("Ground layer mask")]
     [SerializeField] LayerMask _groundLayer;
 
+    private Rigidbody2D _rb;
+
     /// <summary>
     /// Character Transform property
     /// </summary>
-    public Transform CharacterTransform { get; private set; }
+    public Transform CharacterTransform { get { return transform; } }
 
     /// <summary>
     /// World ground layer
     /// </summary>
-    public LayerMask GroundLayer { get; private set; }
+    public LayerMask GroundLayer { get { return _groundLayer; } }
 
     /// <summary>
     /// Character's Rigidbody2D property
     /// </summary>
-    public Rigidbody2D RigBody { get; private set; }
+    public Rigidbody2D RB2D { get { return _rb; } private set { _rb = value; } }
 
     /// <summary>
     /// Character's AnimController script object (for animation control)
@@ -84,58 +86,24 @@ public class PlayerSM : StateMachine
 
     void Awake()
     {
-        idleState   = ScriptableObject.CreateInstance<Idle>();
-        movingState = ScriptableObject.CreateInstance<Moving>();
-        jumpState   = ScriptableObject.CreateInstance<Jump>();
-        fallingState= ScriptableObject.CreateInstance<Falling>();
+        idleState   = new("Idle", "P_Idle", this);
+        movingState = new("Moving", "P_Moving", this);
+        jumpState   = new("Jump", "P_Jump", this);
+        fallingState= new("Falling", "P_Falling", this);
 
-        attackOne   = ScriptableObject.CreateInstance<AttackState>();
-        attackTwo   = ScriptableObject.CreateInstance<AttackState>();
-        attackThree = ScriptableObject.CreateInstance<AttackState>();
-        attackFour  = ScriptableObject.CreateInstance<AttackState>();
-        attackFive  = ScriptableObject.CreateInstance<AttackState>();
+        attackOne   = new("Attack1", "P_Attack1", this);
+        attackTwo   = new("Attack2", "P_Attack2", this);
+        attackThree = new("Attack3", "P_Attack3", this);
+        attackFour  = new("Attack4", "P_Attack4", this);
+        attackFive  = new("Attack5", "P_Attack5", this);
 
-        bowDraw     = ScriptableObject.CreateInstance<BowDraw>();
-        bowRelease  = ScriptableObject.CreateInstance<BowRelease>();
+        bowDraw     = new("BowDraw", "P_BowDraw", this);
+        bowRelease  = new("BowRelease", "P_BowRelease", this);
 
-        magicDraw   = ScriptableObject.CreateInstance<MagicDraw>();
-        magicRelease= ScriptableObject.CreateInstance<MagicRelease>();
+        magicDraw   = new("MagicDraw", "P_MagicDraw", this);
+        magicRelease= new("MagicRelease", "P_MagicRelease", this);
 
-        blockState  = ScriptableObject.CreateInstance<Block>(); 
-
-        idleState
-            .Init("Idle", "P_Idle", this);
-        movingState
-            .Init("Moving", "P_Moving", this);
-        jumpState
-            .Init("Jump", "P_Jump", this);
-        fallingState
-            .Init("Falling", "P_Falling", this);
-
-        attackOne
-            .Init("Attack1", "P_Attack1", this);
-        attackTwo
-            .Init("Attack2", "P_Attack2", this);
-        attackThree
-            .Init("Attack3", "P_Attack3", this);
-        attackFour
-            .Init("Attack4", "P_Attack4", this);
-        attackFive
-            .Init("Attack5", "P_Attack5", this);
-
-        bowDraw
-            .Init("BowDraw", "P_BowDraw", this);
-        bowRelease
-            .Init("BowRelease", "P_BowRelease", this);
-
-        magicDraw
-            .Init("MagicDraw", "P_MagicDraw", this);
-        magicRelease
-            .Init("MagicRelease", "P_MagicRelease", this);
-
-        blockState
-            .Init("Block", "P_Block", this);
-
+        blockState  = new("Block", "P_Block", this); 
 
         attackStates = new AttackState[]
         {
@@ -146,13 +114,11 @@ public class PlayerSM : StateMachine
             attackFive
         };
 
-        CharacterTransform = transform;
-        GroundLayer = _groundLayer;
-        RigBody = GetComponent<Rigidbody2D>();
+        RB2D = GetComponent<Rigidbody2D>();
         Anim = ScriptableObject.CreateInstance<AnimStateManager>();
         Anim.SetAnimator(GetComponentInChildren<Animator>());
 
-        pdl.STORED_GRAVITY_SCALE = RigBody.gravityScale;
+        pdl.STORED_GRAVITY_SCALE = RB2D.gravityScale;
 
     }
 

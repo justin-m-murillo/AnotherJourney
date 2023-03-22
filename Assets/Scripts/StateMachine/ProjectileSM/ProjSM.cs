@@ -16,13 +16,9 @@ public class ProjSM : StateMachine
 
     private void Awake()
     {
-        spawnState   = ScriptableObject.CreateInstance<SpawnProj>();
-        chargedState = ScriptableObject.CreateInstance<ChargedProj>();
-        releaseState = ScriptableObject.CreateInstance<ReleaseProj>();
-
-        spawnState.Init(projdl.SPAWN_NAME, projdl.SPAWN_NAME, this);
-        chargedState.Init(projdl.CHARGED_NAME, projdl.CHARGED_NAME, this);
-        releaseState.Init(projdl.RELEASE_NAME, projdl.RELEASE_NAME, this);
+        spawnState   = new(projdl.SPAWN_NAME, projdl.SPAWN_NAME, this);
+        chargedState = new(projdl.CHARGED_NAME, projdl.CHARGED_NAME, this);
+        releaseState = new(projdl.RELEASE_NAME, projdl.RELEASE_NAME, this);
 
         Anim = ScriptableObject.CreateInstance<AnimStateManager>();
         Anim.SetAnimator(GetComponentInChildren<Animator>());
@@ -33,6 +29,4 @@ public class ProjSM : StateMachine
     {
         return spawnState;
     }
-
-
 }

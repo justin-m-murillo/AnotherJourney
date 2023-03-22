@@ -1,29 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Jump : MovementState
 {
-    public override void Init(string stateName, string animName, PlayerSM stateMachine)
+    public Jump(string stateName, string animName, PlayerSM stateMachine) :
+        base(stateName, animName, stateMachine)
     {
-        base.Init(stateName, animName, stateMachine);
     }
 
     public override void OnEnter()
     {
         base.OnEnter();
 
-        Vector2 vel = _psm.RigBody.velocity;
-        vel.y += _psm.pdl.BASE_JUMP_FORCE;
-        _psm.RigBody.velocity = vel;
+        Vector2 vel = PSM.RB2D.velocity;
+        vel.y += PSM.pdl.BASE_JUMP_FORCE;
+        PSM.RB2D.velocity = vel;
 
-        _psm.Anim.ChangeAnimationState(_animName);
-    }
-
-    public override void OnUpdate()
-    {
-        base.OnUpdate();
-
+        PSM.Anim.ChangeAnimationState(AnimName);
     }
 }
