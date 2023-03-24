@@ -6,24 +6,15 @@ using UnityEngine;
 /// Used for cases when one of the colliding objects is set to IsTrigger
 /// or some setting that disables normal physics
 /// </summary>
-
-public class PhysicsReceiver : MonoBehaviour
+interface IMoveable
 {
-    private Rigidbody2D _rb;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        _rb = GetComponent<Rigidbody2D>();    
-    }
+    Rigidbody2D RB2D { get; set; }
 
     /// <summary>
     /// Object that collides with this gameObject calls this function
     /// to apply "push" force on this gameObject
     /// </summary>
     /// <param name="force">Force to be applied</param>
-    public void ApplyPush(float force)
-    {
-        _rb.AddForce(new Vector2(force, 0), ForceMode2D.Impulse);
-    }
+    /// <param name="direction">Direction of source</param>
+    void ReceivePush(float force);
 }

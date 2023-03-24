@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2514173954286973711}
   - component: {fileID: 2514173954286973708}
   - component: {fileID: 2514173954286973706}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Sprite
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,7 +119,8 @@ GameObject:
   - component: {fileID: 2514173954590323077}
   - component: {fileID: 1918852716}
   - component: {fileID: 8037024654266756644}
-  m_Layer: 6
+  - component: {fileID: 2845953687926802761}
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -283,22 +284,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4083812f43b88904ca20af5f86f78eee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: {fileID: 0}
-  idleState: {fileID: 0}
-  movingState: {fileID: 0}
-  jumpState: {fileID: 0}
-  fallingState: {fileID: 0}
-  attackOne: {fileID: 0}
-  attackTwo: {fileID: 0}
-  attackThree: {fileID: 0}
-  attackFour: {fileID: 0}
-  attackFive: {fileID: 0}
-  attackStates: []
-  bowDraw: {fileID: 0}
-  bowRelease: {fileID: 0}
-  magicDraw: {fileID: 0}
-  magicRelease: {fileID: 0}
-  blockState: {fileID: 0}
   pdl: {fileID: 11400000, guid: 3d531a5238b6d4945b829e916a06ed9f, type: 2}
   arrowSpawnPosition: {fileID: 5788701413825255157}
   arrowPrefab: {fileID: 6767634149926608796, guid: e6ecf64b54e8996478e2e4f462449c94, type: 3}
@@ -307,6 +292,24 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 256
+--- !u!114 &2845953687926802761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2514173954590323128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f37878d6d6b73f4b8a4af0ccc304a54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackPoint: {fileID: 8352049543901888369}
+  _attackRange: 15
+  _attackMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  cdl: {fileID: 11400000, guid: 3d531a5238b6d4945b829e916a06ed9f, type: 2}
 --- !u!1 &3527348290709136877
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,9 +320,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8352049543901888369}
   - component: {fileID: 1213214572438356865}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Attack Target
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -400,9 +403,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5076654651551480742}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Magic Spawn Position
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -431,9 +434,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5788701413825255157}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Arrow Spawn Position
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

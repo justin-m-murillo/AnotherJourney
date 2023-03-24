@@ -1,8 +1,8 @@
-public class BaseState : IState
+public class BaseState
 {
-    public string Name { get; protected set; }
-    public string AnimName { get; protected set; }
-    public StateMachine SMachine { get; protected set; }
+    public string Name { get; set; }
+    public string AnimName { get; set; }
+    public StateMachine SMachine { get; set; }
 
     public BaseState(string stateName, string animName, StateMachine sMachine)
     {

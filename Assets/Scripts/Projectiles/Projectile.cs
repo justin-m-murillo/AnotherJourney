@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] ProjectileDataLibrary projdl; 
+    [SerializeField] protected ProjectileDataLibrary projdl; 
 
     public float Speed { get; set; }
     public float Damage { get; set; }
@@ -16,11 +16,13 @@ public class Projectile : MonoBehaviour
 
     public AnimStateManager Anim { get; private set; }
 
-    private Rigidbody2D _rb;
+    protected Rigidbody2D _rb;
 
     private bool _playedChargedAnim;
     private bool _playedExplosionAnim;
     private bool _fired;
+    protected bool _collided;
+    protected string _parentTag;
 
     private void Start()
     {
@@ -32,6 +34,8 @@ public class Projectile : MonoBehaviour
         _playedChargedAnim = false;
         _playedExplosionAnim = false;
         _fired = false;
+        _collided = false;
+        _parentTag = transform.parent.tag;
 
         gameObject.GetComponent<SpriteRenderer>().enabled = projdl.VISIBLE_ON_START;
 
@@ -58,20 +62,6 @@ public class Projectile : MonoBehaviour
     {
         if (!_playedExplosionAnim) return;
         Destroy(gameObject);
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player")) return;
-        if (LayerMask.LayerToName(collision.gameObject.layer) == "Projectile") return;
-
-        if (collision.gameObject.TryGetComponent(out PhysicsReceiver pr))
-        {
-            pr.ApplyPush(_rb.mass * Speed);
-        }
-
-        _rb.velocity = Vector2.zero;
-        Anim.ChangeAnimationState(projdl.EXPLOSION_NAME);
     }
 
     private bool ChargeProjectile()

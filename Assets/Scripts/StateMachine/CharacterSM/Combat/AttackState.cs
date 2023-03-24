@@ -16,6 +16,7 @@ public class AttackState : CombatState
         PSM.pdl.COMBO_DURATION = PSM.pdl.BASE_COMBO_DURATION; // duration to execute another attack before exiting 
         PSM.Anim.ChangeAnimationState(AnimName); 
         PSM.pdl.COMBO_INDEX++;
+        PSM.Char.ApplyMeleeDamage(PSM.pdl.ATTACK_DAMAGE);
 
         if (!PSM.pdl.INVOKE_IS_GROUNDED(PSM.RB2D, PSM.GroundLayer)) return;
         PSM.pdl.INVOKE_GROUND_DRAG(PSM.RB2D, PSM.pdl.BASE_GROUND_DRAG, 3f);

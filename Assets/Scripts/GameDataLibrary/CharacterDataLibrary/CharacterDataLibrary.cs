@@ -2,11 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "Character Data Library")]
 public class CharacterDataLibrary : ScriptableObject
 {
     [Header("CHARACTER ATTRIBUTES")]
     [Space(8)]
 
+    [Tooltip("The character's max health")]
+    public int BASE_MAX_HEALTH;
+    [Tooltip("The character's current health")]
+    public int BASE_HEALTH;
     [Tooltip("Character movement speed (x-axis)")]
     public float BASE_MOVE_SPEED;
     [Tooltip("Modified gravityScale for increasing the character's fall speed.")]
@@ -50,6 +55,8 @@ public class CharacterDataLibrary : ScriptableObject
     [Header("Basic Attack")]
     [Space(8)]
 
+    [Tooltip("How much damage this character can inflict")]
+    public float ATTACK_DAMAGE;
     [Tooltip("Default length of time before combo terminates (used for resetting comboDuration)")]
     public float BASE_COMBO_DURATION;
     [Tooltip("Length of time before combo terminates")]
@@ -62,4 +69,6 @@ public class CharacterDataLibrary : ScriptableObject
     public bool CAN_ATTACK;
     [Tooltip("Shows how many attacks have been executed and determines the next attack in the combo.")]
     public int COMBO_INDEX;
+    [Tooltip("How much to push the object receiving an attack")]
+    public float ATTACK_PUSH;
 }

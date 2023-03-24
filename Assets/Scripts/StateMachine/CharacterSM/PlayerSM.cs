@@ -1,6 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
+
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Character))]
 
 public class PlayerSM : StateMachine
 { 
@@ -79,6 +83,11 @@ public class PlayerSM : StateMachine
     public AnimStateManager Anim { get; private set; }
 
     /// <summary>
+    /// Character script of the gameObject this FSM is attached to
+    /// </summary>
+    public Character Char { get; private set; }
+
+    /// <summary>
     /// The projectile loaded and prepped to fire
     /// </summary>
     public GameObject LoadedProjectile { get; set; }
@@ -117,6 +126,7 @@ public class PlayerSM : StateMachine
         RB2D = GetComponent<Rigidbody2D>();
         Anim = ScriptableObject.CreateInstance<AnimStateManager>();
         Anim.SetAnimator(GetComponentInChildren<Animator>());
+        Char = GetComponent<Character>();
 
         pdl.STORED_GRAVITY_SCALE = RB2D.gravityScale;
 
