@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StateMachine : MonoBehaviour
@@ -48,7 +46,7 @@ public class StateMachine : MonoBehaviour
 
     private void OnGUI()
     {
-        string content = currentState != null ? currentState.stateName : "(no current state)";
+        string content = currentState != null ? currentState.Name : "(no current state)";
         GUILayout.Label($"<color='black'><size=40>{content}</size></color>");
     }
 }

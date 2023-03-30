@@ -20,7 +20,7 @@ public class ProjectileDataLibrary : ScriptableObject
     [Tooltip("Base speed of the projectile. Parameter to AddForce.Impulse")]
     public float BASE_SPEED;
     [Tooltip("Base damage of the projectile.")]
-    public float BASE_DAMAGE;
+    public int BASE_DAMAGE;
     [Tooltip("Base charge time of the projectile")]
     public float BASE_CHARGE_TIME;
     [Tooltip("True if the projectile is fully charged, false otherwise")]

@@ -2,35 +2,34 @@ using UnityEngine;
 
 public class Moving : Grounded
 {
-    public override void Init(string stateName, string animName, PlayerSM stateMachine)
+    public Moving(string stateName, string animName, PlayerSM stateMachine) :
+        base(stateName, animName, stateMachine)
     {
-        base.Init(stateName, animName, stateMachine);
     }
 
     public override void OnEnter()
     {
         base.OnEnter();
 
-        //_psm.HorizontalInput = 0f;
-        _psm.Anim.ChangeAnimationState(_animName);
+        PSM.Anim.ChangeAnimationState(AnimName);
     }
 
     public override void OnUpdate()
     {
         base.OnUpdate();
 
-        if (!_psm.pdl.IS_FACING_RIGHT && _psm.pdl.HORIZONTAL_INPUT > 0f)
+        if (!PSM.pdl.IS_FACING_RIGHT && PSM.pdl.HORIZONTAL_INPUT > 0f)
         {
             Flip();
         }
-        if (_psm.pdl.IS_FACING_RIGHT && _psm.pdl.HORIZONTAL_INPUT < 0f)
+        if (PSM.pdl.IS_FACING_RIGHT && PSM.pdl.HORIZONTAL_INPUT < 0f)
         {
             Flip();
         }
 
-        if (Mathf.Abs(_psm.pdl.HORIZONTAL_INPUT) < Mathf.Epsilon)
+        if (Mathf.Abs(PSM.pdl.HORIZONTAL_INPUT) < Mathf.Epsilon)
         {
-            stateMachine.ChangeState(_psm.idleState);
+            PSM.ChangeState(PSM.idleState);
         }
     }
 
@@ -38,16 +37,16 @@ public class Moving : Grounded
     {
         base.OnFixedUpdate();
 
-        Vector2 vel = _psm.RigBody.velocity;
-        vel.x = _psm.pdl.HORIZONTAL_INPUT * _psm.pdl.BASE_MOVE_SPEED;
-        _psm.RigBody.velocity = vel;
+        Vector2 vel = PSM.RB2D.velocity;
+        vel.x = PSM.pdl.HORIZONTAL_INPUT * PSM.pdl.BASE_MOVE_SPEED;
+        PSM.RB2D.velocity = vel;
     }
 
     private void Flip()
     {
-        _psm.pdl.IS_FACING_RIGHT = !_psm.pdl.IS_FACING_RIGHT;
-        Vector3 localScale = _psm.CharacterTransform.localScale;
+        PSM.pdl.IS_FACING_RIGHT = !PSM.pdl.IS_FACING_RIGHT;
+        Vector3 localScale = PSM.CharacterTransform.localScale;
         localScale.x *= -1f;
-        _psm.CharacterTransform.localScale = localScale;
+        PSM.CharacterTransform.localScale = localScale;
     }
 }

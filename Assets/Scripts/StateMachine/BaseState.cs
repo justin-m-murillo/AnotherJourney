@@ -1,22 +1,19 @@
-using UnityEngine;
-
-public class BaseState : ScriptableObject
+public class BaseState
 {
-    public string stateName;
-    protected StateMachine stateMachine;
+    public string Name { get; set; }
+    public string AnimName { get; set; }
+    public StateMachine SMachine { get; set; }
 
-    public virtual void Init(
-        string stateName, 
-        StateMachine stateMachine) 
-    { 
-        this.stateName = stateName;
-        this.stateMachine = stateMachine;
+    public BaseState(string stateName, string animName, StateMachine sMachine)
+    {
+        Name = stateName;
+        AnimName = animName;
+        SMachine = sMachine;
     }
-    public virtual void OnEnter() { }
-    public virtual void OnFixedUpdate() { }
-    public virtual void OnUpdate() { }
-    public virtual void OnLateUpdate() { }
-    public virtual void OnExit() { }
 
-    public StateMachine GetStateMachine() { return stateMachine; }
+    public virtual void OnEnter() { }
+    public virtual void OnExit() { }
+    public virtual void OnUpdate() { }
+    public virtual void OnFixedUpdate() { }
+    public virtual void OnLateUpdate() { }
 }

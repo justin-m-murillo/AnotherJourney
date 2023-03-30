@@ -10,8 +10,6 @@ public class InputController : MonoBehaviour
 
     private static PlayerControls playerControls;
 
-    private GameObject _projectile;
-
     private void Awake()
     {
         playerControls = new PlayerControls();
@@ -58,14 +56,12 @@ public class InputController : MonoBehaviour
         if (_psm.pdl.IS_JUMP) return;
         if (_psm.pdl.JUMP_COOLDOWN > 0f) return;
         if (_psm.pdl.BOW_DRAWN) return;
-        if (!_psm.pdl.INVOKE_IS_GROUNDED(_psm.RigBody, _psm.GroundLayer)) return;
+        if (!_psm.pdl.INVOKE_IS_GROUNDED(_psm.RB2D, _psm.GroundLayer)) return;
         /////////////////////////////////////////////////////////////////
         
         _psm.pdl.IS_JUMP = true;
         _jumpPerformed = false;
-        _psm.currentState
-            .GetStateMachine()
-            .ChangeState(_psm.jumpState);
+        _psm.ChangeState(_psm.jumpState);
     }
 
     public void Jump_performed(InputAction.CallbackContext context)
@@ -80,7 +76,7 @@ public class InputController : MonoBehaviour
         /////////////////////////////////////////////////////////////////
 
         _psm.pdl.INVOKE_GRAVITY_SCALAR(
-            _psm.RigBody, 
+            _psm.RB2D, 
             _psm.pdl.BASE_GRAVITY_SCALE, 
             1.5f);
     }
@@ -97,9 +93,7 @@ public class InputController : MonoBehaviour
             _psm.pdl.COMBO_INDEX;
 
         _psm.pdl.CAN_ATTACK = false;
-        _psm.currentState
-            .GetStateMachine()
-            .ChangeState(_psm.attackStates[_psm.pdl.COMBO_INDEX]);
+        _psm.ChangeState(_psm.attackStates[_psm.pdl.COMBO_INDEX]);
     }
 
     public void Bow_started(InputAction.CallbackContext context)
@@ -108,9 +102,7 @@ public class InputController : MonoBehaviour
         if (!_psm.pdl.CAN_BOW) return;
         /////////////////////////////////////////////////////////////////
 
-        _psm.currentState
-            .GetStateMachine()
-            .ChangeState(_psm.bowDraw);
+        _psm.ChangeState(_psm.bowDraw);
     }
 
     public void Bow_canceled(InputAction.CallbackContext context)
@@ -124,9 +116,7 @@ public class InputController : MonoBehaviour
         if (!_psm.pdl.CAN_MAGIC) return;
         //////////////////////////////////////////////////////////////////
 
-        _psm.currentState
-            .GetStateMachine()
-            .ChangeState(_psm.magicDraw);
+        _psm.ChangeState(_psm.magicDraw);
     }
 
     public void Magic_canceled(InputAction.CallbackContext context)
@@ -141,9 +131,7 @@ public class InputController : MonoBehaviour
         //////////////////////////////////////////////////////////////////
 
         _psm.pdl.IS_BLOCKING = true;
-        _psm.currentState
-            .GetStateMachine()
-            .ChangeState(_psm.blockState);
+        _psm.ChangeState(_psm.blockState);
     }
 
     public void Block_canceled(InputAction.CallbackContext context)

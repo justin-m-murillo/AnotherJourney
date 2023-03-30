@@ -2,37 +2,37 @@ using UnityEngine;
 
 public class SpawnProj : ProjectileState
 {
-    public override void Init(string stateName, string animName, ProjSM stateMachine)
+    public SpawnProj(string stateName, string animName, ProjSM stateMachine) :
+        base(stateName, animName, stateMachine)
     {
-        base.Init(stateName, animName, stateMachine);
     }
 
     public override void OnEnter()
     {
         base.OnEnter();
-        _projsm.Anim.ChangeAnimationState(_animName);
-        _projsm.Proj.Speed = _projsm.projdl.BASE_SPEED;
-        _projsm.Proj.Damage = _projsm.projdl.BASE_DAMAGE;
-        _projsm.Proj.ChargeTime = _projsm.projdl.BASE_CHARGE_TIME;
-        _projsm.Proj.IsCharged = false;
+        PrSM.Anim.ChangeAnimationState(AnimName);
+        PrSM.Proj.Speed = PrSM.projdl.BASE_SPEED;
+        PrSM.Proj.Damage = PrSM.projdl.BASE_DAMAGE;
+        PrSM.Proj.ChargeTime = PrSM.projdl.BASE_CHARGE_TIME;
+        PrSM.Proj.IsCharged = false;
     }
 
     public override void OnUpdate()
     {
         base.OnUpdate();
 
-        _projsm.Proj.IsCharged = ChargeProjectile();
+        PrSM.Proj.IsCharged = ChargeProjectile();
 
-        if (!_projsm.Proj.IsCharged) return;
-        stateMachine.ChangeState(_projsm.chargedState);
+        if (!PrSM.Proj.IsCharged) return;
+        PrSM.ChangeState(PrSM.chargedState);
     }
 
     private bool ChargeProjectile()
     {
-        _projsm.Proj.ChargeTime = _projsm.Proj.ChargeTime < _projsm.projdl.BASE_CHARGE_TIME ?
-            _projsm.Proj.ChargeTime + Time.deltaTime :
-            _projsm.projdl.BASE_CHARGE_TIME;
+        PrSM.Proj.ChargeTime = PrSM.Proj.ChargeTime < PrSM.projdl.BASE_CHARGE_TIME ?
+            PrSM.Proj.ChargeTime + Time.deltaTime :
+            PrSM.projdl.BASE_CHARGE_TIME;
 
-        return _projsm.Proj.ChargeTime == _projsm.projdl.BASE_CHARGE_TIME;
+        return PrSM.Proj.ChargeTime == PrSM.projdl.BASE_CHARGE_TIME;
     }
 }
